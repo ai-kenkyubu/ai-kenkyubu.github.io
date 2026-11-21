@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI研究部｜競輪・競艇 AI予想の全レース検証データ</title>
+<meta name="description" content="AIに競輪・競艇の全レース予想をさせて、毎晩ぜんぶ答え合わせ。当たっても外れても、的中率と回収率を全部公開する検証プロジェクト「AI研究部」の公式ページです。">
+<style>
+:root{
+--bg:#070b1a; --panel:#0e1530; --panel2:#111a3d;
+--cyan:#22d3ee; --violet:#a78bfa; --green:#34d399;
+--text:#e8ecf8; --muted:#9aa7c7; --line:#23305e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(900px 480px at 15% -80px,rgba(34,211,238,.14),transparent 60%),radial-gradient(900px 480px at 85% -80px,rgba(167,139,250,.14),transparent 60%),var(--bg);color:var(--text);font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;line-height:1.7}
+a{color:var(--cyan)}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px 64px}
+header.hero{padding:24px 0 8px;text-align:center}
+header.hero img{width:100%;border-radius:16px;border:1px solid var(--line)}
+.tagline{margin:20px 0 4px;font-size:1.05rem;color:var(--muted)}
+h1{font-size:2rem;letter-spacing:.05em}
+h1.grad{background:linear-gradient(90deg,var(--cyan),var(--violet),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+section{margin-top:44px}
+h2{font-size:1.35rem;border-left:4px solid var(--cyan);padding-left:10px;margin-bottom:16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--green))}
+.card .label{color:var(--muted);font-size:.85rem}
+.card .value{font-size:1.7rem;font-weight:700;margin-top:4px;background:linear-gradient(90deg,var(--cyan),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+.card .sub{color:var(--muted);font-size:.8rem;margin-top:2px}
+.highlight{background:linear-gradient(135deg,rgba(34,211,238,.10),rgba(167,139,250,.10));border:1px solid var(--cyan);border-radius:14px;padding:18px 20px}
+.highlight .h-title{font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.highlight .h-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.highlight .h-item{background:rgba(7,11,26,.55);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.highlight .h-item .l{color:var(--muted);font-size:.78rem}
+.highlight .h-item .v{font-size:1.25rem;font-weight:700}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.link-card{display:block;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:18px;text-decoration:none;color:var(--text);transition:border-color .15s,transform .15s}
+.link-card:hover{border-color:var(--cyan);transform:translateY(-2px)}
+.link-card .t{font-weight:700;font-size:1.05rem}
+.link-card .d{color:var(--muted);font-size:.88rem;margin-top:6px}
+.link-card .arrow{color:var(--cyan);font-weight:700}
+.riders{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.rider-card{display:block;border-radius:14px;padding:22px;text-decoration:none;color:var(--text);background:var(--panel2);border:1px solid var(--line);position:relative;overflow:hidden;transition:transform .15s}
+.rider-card:hover{transform:translateY(-2px)}
+.rider-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--green))}
+.rider-card .sport{font-size:1.6rem}
+.rider-card .t{font-weight:700;font-size:1.2rem;margin-top:6px}
+.rider-card .d{color:var(--muted);font-size:.9rem;margin-top:6px}
+.rider-card .badge{display:inline-block;margin-top:12px;padding:2px 10px;border:1px solid var(--cyan);border-radius:999px;color:var(--cyan);font-size:.78rem}
+ul.rules{list-style:none}
+ul.rules li{padding:6px 0;border-bottom:1px dashed var(--line)}
+ul.rules li:last-child{border-bottom:none}
+.ad-slot{border:1px dashed var(--line);border-radius:12px;padding:18px;text-align:center;color:var(--muted);font-size:.85rem}
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;text-align:center}
+.note-small{color:var(--muted);font-size:.85rem}
+nav.quick{position:sticky;top:0;z-index:50;display:flex;gap:8px;overflow-x:auto;padding:10px 2px;background:rgba(7,11,26,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);scrollbar-width:none}
+nav.quick::-webkit-scrollbar{display:none}
+nav.quick a{flex-shrink:0;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--panel2);color:var(--text);text-decoration:none;font-size:.88rem;font-weight:600}
+nav.quick a:hover{border-color:var(--cyan)}
+nav.quick a.ext{border-color:var(--cyan);color:var(--cyan)}
+section{scroll-margin-top:64px}
+.gtitle{font-size:1rem;margin:18px 0 8px}
+.gtitle:first-of-type{margin-top:6px}
+.brow{display:flex;align-items:center;gap:10px;margin:4px 0}
+.bdate{width:44px;color:var(--muted);font-size:.82rem;text-align:right;flex-shrink:0}
+.bbar{flex:1;background:#0a1030;border:1px solid var(--line);border-radius:6px;height:16px;overflow:hidden}
+.bfill{display:block;height:100%;border-radius:6px}
+.bval{width:56px;font-size:.85rem;font-weight:700;flex-shrink:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+<img src="banner.webp" alt="AI研究部 KEIRIN × BOAT RACE DATA LAB">
+<p class="tagline">AI予想を、ぜんぶ検証する。</p>
+<h1><span class="grad">AI研究部</span></h1>
+<p class="note-small">AIに競輪・競艇の全レース予想をさせて、毎晩ぜんぶ答え合わせ。<br>当たっても外れても、的中率と回収率を全部公開しています。</p>
+</header>
+
+<nav class="quick">
+<a href="#dashboard">📊 成績</a>
+<a href="#graphs">📈 グラフ</a>
+<a href="#riders">🏆 選手データ</a>
+<a class="ext" href="https://note.com/calm_dbai">📝 note</a>
+<a class="ext" href="https://x.com/nukodbai">𝕏 X</a>
+<a href="#rules">📏 ルール</a>
+</nav>
+
+<section>
+<!--HIGHLIGHT_START-->
+<div class="highlight">
+<div class="h-title">🔥 昨日の検証ハイライト（2026年11月21日）</div>
+<div class="h-grid">
+<div class="h-item"><div class="l">🚴 競輪・三連単</div><div class="v">23.6%</div></div>
+<div class="h-item"><div class="l">🚴 競輪・自信度「高」三連単</div><div class="v">80.0%</div></div>
+<div class="h-item"><div class="l">🚤 競艇・三連単</div><div class="v">25.3%</div></div>
+<div class="h-item"><div class="l">🚤 競艇・自信度「高」三連単</div><div class="v">50.0%</div></div>
+</div>
+</div>
+<!--HIGHLIGHT_END-->
+</section>
+
+<section id="dashboard">
+<h2>🚴 競輪ダッシュボード</h2>
+<div class="cards">
+<div class="card"><div class="label">🏁 検証レース数（累計）</div><div class="value">1,102</div><div class="sub">2026/11/7 開始</div></div>
+<div class="card"><div class="label">🎯 三連単 的中率</div><div class="value">24.1%</div><div class="sub">266 / 1,102</div></div>
+<div class="card"><div class="label">🎯 二車単 的中率</div><div class="value">45.7%</div><div class="sub">437 / 956</div></div>
+<div class="card"><div class="label">💴 100円買いシミュレーション回収率</div><div class="value">69.8%</div><div class="sub">全買い目を100円ずつ買った想定</div></div>
+</div>
+<p class="note-small" style="margin-top:8px">※ 2026年11月21日時点の累計。毎晩の検証で更新します。</p>
+</section>
+
+<section>
+<h2>🚤 競艇ダッシュボード</h2>
+<div class="cards">
+<div class="card"><div class="label">🏁 検証レース数（累計）</div><div class="value">99</div><div class="sub">2026/11/21 開始</div></div>
+<div class="card"><div class="label">🎯 三連単 的中率</div><div class="value">25.3%</div><div class="sub">25 / 99</div></div>
+<div class="card"><div class="label">🎯 二連単 的中率</div><div class="value">42.4%</div><div class="sub">42 / 99</div></div>
+<div class="card"><div class="label">💴 100円買いシミュレーション回収率</div><div class="value">81.1%</div><div class="sub">全買い目を100円ずつ買った想定</div></div>
+</div>
+<p class="note-small" style="margin-top:8px">※ 2026年11月21日時点の累計（初日）。毎晩の検証で更新します。</p>
+</section>
+
+<section id="graphs">
+<h2>📊 グラフで見る成績</h2>
+<div class="panel">
+<!--GRAPHS_START-->
+<p class="note-small">2026年11月のデータ（検証開始からの全日分）</p>
+<h3 class="gtitle">🚴 競輪・三連単的中率（日別）</h3>
+<div class="brow"><span class="bdate">11/7</span><span class="bbar"><span class="bfill" style="width:39.8%;background:linear-gradient(90deg,#22d3ee,#a78bfa)"></span></span><span class="bval">15.9%</span></div>
+<div class="brow"><span class="bdate">11/8</span><span class="bbar"><span class="bfill" style="width:42.2%;background:linear-gradient(90deg,#22d3ee,#a78bfa)"></span></span><span class="bval">16.9%</span></div>
+<div class="brow"><span class="bdate">11/9</span><span class="bbar"><span class="bfill" style="width:63.3%;background:linear-gradient(90deg,#22d3ee,#a78bfa)"></span></span><span class="bval">25.3%</span></div>
+<div class="brow"><span class="bdate">11/10</span><span class="bbar"><span class="bfill" style="width:67.2%;background:linear-gradient(90deg,#22d3ee,#a78bfa)"></span></span><span class="bval">26.9%</span></div>
+<div class="brow"><span class="bdate">11/11</span><span class="bbar"><span class="bfill" style="width:95.2%;background:linear-gradient(90deg,#22d3ee,#a78bfa)"></span></span><span class="bval">38.1%</span></div>
+<div class="brow"><span class="bdate">11/12</span><span class="bbar"><span class="bfill" style="width:36.2%;background:linear-gradient(90deg,#22d3ee,#a78bfa)"></span></span><span class="bval">14.5%</span></div>
+<div class="brow"><span class="bdate">11/13</span><span class="bbar"><span class="bfill" style="width:52.0%;background:linear-gradient(90deg,#22d3ee,#a78bfa)"></span></span><span class="bval">20.8%</span></div>
+<div class="brow"><span class="bdate">11/14</span><span class="bbar"><span class="bfill" style="width:85.8%;background:linear-gradient(90deg,#22d3ee,#a78bfa)"></span></span><span class="bval">34.3%</span></div>
+<div class="brow"><span class="bdate">11/15</span><span class="bbar"><span class="bfill" style="width:62.5%;background:linear-gradient(90deg,#22d3ee,#a78bfa)"></span></span><span class="bval">25.0%</span></div>
+<div class="brow"><span class="bdate">11/16</span><span class="bbar"><span class="bfill" style="width:66.0%;background:linear-gradient(90deg,#22d3ee,#a78bfa)"></span></span><span class="bval">26.4%</span></div>
+<div class="brow"><span class="bdate">11/17</span><span class="bbar"><span class="bfill" style="width:70.5%;background:linear-gradient(90deg,#22d3ee,#a78bfa)"></span></span><span class="bval">28.2%</span></div>
+<div class="brow"><span class="bdate">11/18</span><span class="bbar"><span class="bfill" style="width:69.5%;background:linear-gradient(90deg,#22d3ee,#a78bfa)"></span></span><span class="bval">27.8%</span></div>
+<div class="brow"><span class="bdate">11/19</span><span class="bbar"><span class="bfill" style="width:53.2%;background:linear-gradient(90deg,#22d3ee,#a78bfa)"></span></span><span class="bval">21.3%</span></div>
+<div class="brow"><span class="bdate">11/20</span><span class="bbar"><span class="bfill" style="width:35.0%;background:linear-gradient(90deg,#22d3ee,#a78bfa)"></span></span><span class="bval">14.0%</span></div>
+<div class="brow"><span class="bdate">11/21</span><span class="bbar"><span class="bfill" style="width:59.0%;background:linear-gradient(90deg,#22d3ee,#a78bfa)"></span></span><span class="bval">23.6%</span></div>
+<h3 class="gtitle">💴 競輪・100円買いシミュレーション回収率（日別）</h3>
+<div class="brow"><span class="bdate">11/9</span><span class="bbar"><span class="bfill" style="width:68.0%;background:linear-gradient(90deg,#34d399,#22d3ee)"></span></span><span class="bval">81.6%</span></div>
+<div class="brow"><span class="bdate">11/10</span><span class="bbar"><span class="bfill" style="width:44.8%;background:linear-gradient(90deg,#34d399,#22d3ee)"></span></span><span class="bval">53.7%</span></div>
+<div class="brow"><span class="bdate">11/11</span><span class="bbar"><span class="bfill" style="width:73.4%;background:linear-gradient(90deg,#34d399,#22d3ee)"></span></span><span class="bval">88.1%</span></div>
+<div class="brow"><span class="bdate">11/12</span><span class="bbar"><span class="bfill" style="width:47.3%;background:linear-gradient(90deg,#34d399,#22d3ee)"></span></span><span class="bval">56.8%</span></div>
+<div class="brow"><span class="bdate">11/13</span><span class="bbar"><span class="bfill" style="width:51.9%;background:linear-gradient(90deg,#34d399,#22d3ee)"></span></span><span class="bval">62.3%</span></div>
+<div class="brow"><span class="bdate">11/14</span><span class="bbar"><span class="bfill" style="width:50.9%;background:linear-gradient(90deg,#34d399,#22d3ee)"></span></span><span class="bval">61.1%</span></div>
+<div class="brow"><span class="bdate">11/15</span><span class="bbar"><span class="bfill" style="width:64.6%;background:linear-gradient(90deg,#34d399,#22d3ee)"></span></span><span class="bval">77.5%</span></div>
+<div class="brow"><span class="bdate">11/16</span><span class="bbar"><span class="bfill" style="width:60.9%;background:linear-gradient(90deg,#34d399,#22d3ee)"></span></span><span class="bval">73.1%</span></div>
+<div class="brow"><span class="bdate">11/17</span><span class="bbar"><span class="bfill" style="width:63.7%;background:linear-gradient(90deg,#34d399,#22d3ee)"></span></span><span class="bval">76.5%</span></div>
+<div class="brow"><span class="bdate">11/18</span><span class="bbar"><span class="bfill" style="width:93.8%;background:linear-gradient(90deg,#34d399,#22d3ee)"></span></span><span class="bval">112.6%</span></div>
+<div class="brow"><span class="bdate">11/19</span><span class="bbar"><span class="bfill" style="width:53.6%;background:linear-gradient(90deg,#34d399,#22d3ee)"></span></span><span class="bval">64.3%</span></div>
+<div class="brow"><span class="bdate">11/20</span><span class="bbar"><span class="bfill" style="width:20.9%;background:linear-gradient(90deg,#34d399,#22d3ee)"></span></span><span class="bval">25.1%</span></div>
+<div class="brow"><span class="bdate">11/21</span><span class="bbar"><span class="bfill" style="width:45.8%;background:linear-gradient(90deg,#34d399,#22d3ee)"></span></span><span class="bval">55.0%</span></div>
+<p class="note-small">回収率100%が損益分岐ライン。シミュレーションは2026/11/9開始。</p>
+<h3 class="gtitle">🚤 競艇・三連単的中率（日別）</h3>
+<div class="brow"><span class="bdate">11/21</span><span class="bbar"><span class="bfill" style="width:63.3%;background:linear-gradient(90deg,#a78bfa,#34d399)"></span></span><span class="bval">25.3%</span></div>
+<!--GRAPHS_END-->
+</div>
+</section>
+
+<section id="riders">
+<h2>🏆 選手データ・注目選手の選出</h2>
+<div class="riders">
+<a class="rider-card" href="riders.html">
+<div class="sport">🚴 競輪</div>
+<div class="t">選手データ・注目選手</div>
+<div class="d">KEIRINグランプリ出場決定選手、競走得点トップ10、S級の注目選手、そしてA級注目選手3名の選出理由と毎日の出走結果の追跡。</div>
+<span class="badge">毎週水曜更新／A級は毎日追跡</span>
+</a>
+<a class="rider-card" href="boat-riders.html">
+<div class="sport">🚤 競艇</div>
+<div class="t">選手データ・注目選手</div>
+<div class="d">ボートレースグランプリ出場圏内の選手、全国勝率トップ10、A1と女子の注目選手をデータ根拠つきで独自選出。</div>
+<span class="badge">毎週水曜更新</span>
+</a>
+</div>
+</section>
+
+<section id="links">
+<h2>🔗 毎日の記録はこちら</h2>
+<div class="links">
+<a class="link-card" href="https://note.com/calm_dbai" style="border-left:4px solid #41c9b4">
+<div class="t">note（AI研究部） <span class="arrow">›</span></div>
+<div class="d">朝の注目レース予想と、夜の全レース検証を毎日投稿しています。</div>
+</a>
+<a class="link-card" href="https://x.com/nukodbai" style="border-left:4px solid #e8ecf8">
+<div class="t">X（@nukodbai） <span class="arrow">›</span></div>
+<div class="d">朝・夕の途中経過・夜の結果を速報しています。</div>
+</a>
+<a class="link-card" href="https://note.com/calm_dbai/n/nc7ee6c0a12dc" style="border-left:4px solid #a78bfa">
+<div class="t">最初の検証記事 <span class="arrow">›</span></div>
+<div class="d">AIに競輪の全レース予想をさせて2週間ガチ検証した結果</div>
+</a>
+</div>
+</section>
+
+<section id="rules">
+<h2>📏 検証のルール</h2>
+<div class="panel">
+<ul class="rules">
+<li>🗓️ 予想は開催当日の朝に公開し、夜に全レース分を答え合わせします。</li>
+<li>📊 外れたレースも隠さず、的中率・回収率をそのまま公開します。</li>
+<li>🚫 これは検証データの公開であり、<strong>買い推奨ではありません</strong>。「当たる」「勝てる」といった約束はしません。</li>
+<li>🔍 他の予想サイトの予想も参考にしています。</li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2>📢 お知らせ</h2>
+<!-- 広告枠：アフィリエイト等を導入する場合はここに「広告」表記つきで設置する -->
+<div class="ad-slot">広告枠（準備中）</div>
+</section>
+
+<footer>
+AI研究部｜AI予想の全レース検証データを毎日公開しています<br>
+運営：AI研究部（AIを使用して運営しています）
+</footer>
+
+</div>
+</body>
+</html>

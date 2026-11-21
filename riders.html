@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>競輪 選手データ｜AI研究部</title>
+<meta name="description" content="KEIRINグランプリ2026出場決定選手、競走得点トップ10、好調選手とA級注目選手（AI研究部の独自選出）を掲載。毎週水曜更新。">
+<style>
+  :root{
+    --bg:#070b1a; --panel:#0e1530; --panel2:#111a3d;
+    --cyan:#22d3ee; --violet:#a78bfa; --green:#34d399;
+    --text:#e8ecf8; --muted:#9aa7c7; --line:#23305e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;line-height:1.7}
+  a{color:var(--cyan)}
+  .wrap{max-width:960px;margin:0 auto;padding:0 16px 64px}
+  header.hero{padding:28px 0 8px;text-align:center}
+  h1{font-size:1.8rem;letter-spacing:.05em}
+  h1 .grad{background:linear-gradient(90deg,var(--cyan),var(--violet),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .tagline{color:var(--muted);margin-top:6px}
+  section{margin-top:40px}
+  h2{font-size:1.25rem;border-left:4px solid var(--cyan);padding-left:10px;margin-bottom:14px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
+  table{width:100%;border-collapse:collapse;font-size:.95rem}
+  th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  .score{font-weight:700;color:var(--green);white-space:nowrap}
+  .reason{color:var(--muted);font-size:.88rem}
+  .note-small{color:var(--muted);font-size:.85rem}
+  .badge{display:inline-block;background:var(--panel2);border:1px solid var(--violet);color:var(--violet);border-radius:999px;padding:0 10px;font-size:.75rem;margin-left:8px}
+  footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;text-align:center}
+  .back{margin-top:20px;display:inline-block}
+  @media (max-width:640px){ table{font-size:.85rem} th,td{padding:6px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>🚴 競輪 <span class="grad">選手データ</span></h1>
+    <p class="tagline">2026年11月21日時点のデータです。毎週水曜日に更新します。</p>
+    <a class="back" href="index.html">← トップページに戻る</a>
+  </header>
+
+  <section>
+    <h2>🏆 KEIRINグランプリ2026 出場決定選手</h2>
+    <div class="panel">
+      <p>2026年12月30日・いわき平競輪場で開催。出場枠は9名。現在、GI優勝による優先出場の<strong>4名</strong>が決定しています。</p>
+      <table style="margin-top:12px">
+        <tr><th>氏名</th><th>期別</th><th>級班</th><th>所属</th><th>決定の根拠</th></tr>
+        <tr><td>古性優作</td><td>100期</td><td>S級S班</td><td>大阪</td><td>GI優勝：日本選手権・高松宮記念杯の2勝</td></tr>
+        <tr><td>脇本雄太</td><td>94期</td><td>S級S班</td><td>福井</td><td>GI優勝：全日本選抜</td></tr>
+        <tr><td>犬伏湧也</td><td>119期</td><td>S級1班</td><td>徳島</td><td>GI優勝：オールスター</td></tr>
+        <tr><td>石原颯</td><td>117期</td><td>S級1班</td><td>香川</td><td>GI優勝：寛仁親王牌</td></tr>
+      </table>
+      <p class="note-small" style="margin-top:12px">残り5枠と補欠1名は、競輪祭（11/18〜23・小倉）終了時点の選考用賞金で決まります。11/16時点の賞金上位候補は吉田拓矢・眞杉匠・深谷知広・松浦悠士・佐々木悠葵です。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>📊 競走得点トップ10（S級・男子）</h2>
+    <div class="panel">
+      <table>
+        <tr><th>順位</th><th>氏名</th><th>期別</th><th>級班</th><th>競走得点</th><th>脚質</th></tr>
+        <tr><td>1</td><td>犬伏湧也</td><td>119期</td><td>S級1班</td><td class="score">120.31</td><td>逃</td></tr>
+        <tr><td>2</td><td>吉田拓矢</td><td>107期</td><td>S級S班</td><td class="score">120.28</td><td>両</td></tr>
+        <tr><td>3</td><td>太田海也</td><td>121期</td><td>S級1班</td><td class="score">120.16</td><td>逃</td></tr>
+        <tr><td>4</td><td>古性優作</td><td>100期</td><td>S級S班</td><td class="score">119.10</td><td>両</td></tr>
+        <tr><td>5</td><td>松本貴治</td><td>111期</td><td>S級1班</td><td class="score">118.42</td><td>両</td></tr>
+        <tr><td>6</td><td>眞杉匠</td><td>113期</td><td>S級S班</td><td class="score">117.41</td><td>逃</td></tr>
+        <tr><td>7</td><td>石原颯</td><td>117期</td><td>S級1班</td><td class="score">116.79</td><td>逃</td></tr>
+        <tr><td>8</td><td>寺崎浩平</td><td>117期</td><td>S級S班</td><td class="score">116.75</td><td>逃</td></tr>
+        <tr><td>9</td><td>浅井康太</td><td>90期</td><td>S級1班</td><td class="score">116.65</td><td>両</td></tr>
+        <tr><td>10</td><td>深谷知広</td><td>96期</td><td>S級1班</td><td class="score">116.61</td><td>逃</td></tr>
+      </table>
+      <p class="note-small" style="margin-top:12px">平均競走得点（直近4か月）。出典：keirin-mobile 平均競走得点ランキング（2026/11/21取得）。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>🔥 好調なS級選手 3名<span class="badge">AI研究部の独自選出</span></h2>
+    <div class="panel">
+      <table>
+        <tr><th>氏名</th><th>競走得点</th><th>選出理由</th></tr>
+        <tr><td>石原颯（117期・S級1班）</td><td class="score">116.79</td><td class="reason">勝率50.0%・勝利数12と高水準で、寛仁親王牌（GI）優勝によりグランプリ出場も決定。数字とビッグタイトル実績の両方が揃う今季の好調選手。</td></tr>
+        <tr><td>深谷知広（96期・S級1班）</td><td class="score">116.61</td><td class="reason">勝率50.0%に加え、勝利数13はトップ10圏内でも最多クラス。得点ランクこそ10位だが、勝ち星の多さでは最上位級の内容。</td></tr>
+        <tr><td>古性優作（100期・S級S班）</td><td class="score">119.10</td><td class="reason">直近の四日市GIIIで優勝。賞金ランキング1位・今季GI2勝と、安定感と勝負強さを兼ね備える。</td></tr>
+      </table>
+      <p class="note-small" style="margin-top:12px">※「連勝数」を公式に確認できる公開データがなかったため、直近成績ベースで選出しています。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>🌱 A級の注目選手 3名<span class="badge">AI研究部の独自選出</span></h2>
+    <div class="panel">
+      <table>
+        <tr><th>氏名</th><th>競走得点</th><th>選出理由</th></tr>
+        <tr><td>佐伯亮輔（113期・A級1班）</td><td class="score">98.83</td><td class="reason">A級1・2班ランキングのトップ。勝率100%（6勝）と表示されており、得点・勝率の両面でA級最上位の数字。</td></tr>
+        <tr><td>一丸尚伍（121期・A級1班）</td><td class="score">98.19</td><td class="reason">得点2位に加え、勝率76.1%・勝利数16・3連対率100%。若い121期でこの数字は昇級争いの中心候補。</td></tr>
+        <tr><td>三神遼矢（127期・A級2班）</td><td class="score">96.66</td><td class="reason">A級2班ながら得点ランク7位、勝率100%（6勝）。1班の選手を押しのけて上位にいる新鋭。</td></tr>
+      </table>
+      <p class="note-small" style="margin-top:12px">A級の競走得点はS級とは算定基準が異なるため、A級内の順位・数値で評価しています。</p>
+    </div>
+  </section>
+
+  <footer>
+    AI研究部｜AI予想の全レース検証データを毎日公開しています<br>
+    運営：AI研究部（AIを使用して運営しています）<br>
+    <a href="index.html">トップページ</a> ／ <a href="https://note.com/calm_dbai">note</a> ／ <a href="https://x.com/nukodbai">X</a>
+  </footer>
+
+</div>
+</body>
+</html>

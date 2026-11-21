@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>競艇 選手データ｜AI研究部</title>
+<meta name="description" content="ボートレースグランプリ出場圏内の選手、全国勝率トップ10、注目のA1選手と女子注目選手（AI研究部の独自選出）を掲載。毎週水曜更新。">
+<style>
+  :root{
+    --bg:#070b1a; --panel:#0e1530; --panel2:#111a3d;
+    --cyan:#22d3ee; --violet:#a78bfa; --green:#34d399;
+    --text:#e8ecf8; --muted:#9aa7c7; --line:#23305e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;line-height:1.7}
+  a{color:var(--cyan)}
+  .wrap{max-width:960px;margin:0 auto;padding:0 16px 64px}
+  header.hero{padding:28px 0 8px;text-align:center}
+  h1{font-size:1.8rem;letter-spacing:.05em}
+  h1 .grad{background:linear-gradient(90deg,var(--cyan),var(--violet),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .tagline{color:var(--muted);margin-top:6px}
+  section{margin-top:40px}
+  h2{font-size:1.25rem;border-left:4px solid var(--cyan);padding-left:10px;margin-bottom:14px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
+  table{width:100%;border-collapse:collapse;font-size:.95rem}
+  th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  .score{font-weight:700;color:var(--green);white-space:nowrap}
+  .reason{color:var(--muted);font-size:.88rem}
+  .note-small{color:var(--muted);font-size:.85rem}
+  .badge{display:inline-block;background:var(--panel2);border:1px solid var(--violet);color:var(--violet);border-radius:999px;padding:0 10px;font-size:.75rem;margin-left:8px}
+  .warn{border:1px solid var(--violet);border-radius:8px;padding:10px 14px;margin:12px 0;color:var(--text);font-size:.9rem}
+  footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;text-align:center}
+  .back{margin-top:20px;display:inline-block}
+  @media (max-width:640px){ table{font-size:.85rem} th,td{padding:6px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>🚤 競艇 <span class="grad">選手データ</span></h1>
+    <p class="tagline">2026年11月21日時点のデータです。毎週水曜日に更新します。</p>
+    <a class="back" href="index.html">← トップページに戻る</a>
+  </header>
+
+  <section>
+    <h2>🏆 ボートレースグランプリ 出場圏内の選手</h2>
+    <div class="panel">
+      <p>第41回ボートレースグランプリ（賞金王決定戦）は2026年12月15〜20日・大村で開催。出場は、SGチャレンジカップ（11/24〜29・常滑）終了時点の獲得賞金上位18名です。</p>
+      <div class="warn">2026年11月21日時点では正式決定者はまだいません。下表は11月20日現在の賞金上位18名＝「出場圏内（内定濃厚）」です。チャレンジカップの結果で入れ替わる可能性があります（19位・平本真之との差は約402万円）。</div>
+      <table>
+        <tr><th>賞金順位</th><th>氏名</th><th>支部</th><th>獲得賞金</th><th>主な実績（2026年）</th></tr>
+        <tr><td>1</td><td>峰竜太</td><td>佐賀</td><td class="score">1億9,505万円</td><td>SGクラシック・SGメモリアル優勝</td></tr>
+        <tr><td>2</td><td>定松勇樹</td><td>佐賀</td><td class="score">1億3,127万円</td><td>SGオーシャンカップ優勝</td></tr>
+        <tr><td>3</td><td>山田康二</td><td>佐賀</td><td class="score">1億3,088万円</td><td>SGダービー優勝（SG初優勝）</td></tr>
+        <tr><td>4</td><td>丸野一樹</td><td>滋賀</td><td class="score">1億1,903万円</td><td>SGオールスター優勝（SG初優勝）</td></tr>
+        <tr><td>5</td><td>池田浩二</td><td>愛知</td><td class="score">1億1,903万円</td><td>G1児島キングカップ優勝</td></tr>
+        <tr><td>6</td><td>白井英治</td><td>山口</td><td class="score">1億1,717万円</td><td>G1優勝4回</td></tr>
+        <tr><td>7</td><td>吉田拡郎</td><td>岡山</td><td class="score">1億574万円</td><td>SGグランドチャンピオン優勝</td></tr>
+        <tr><td>8</td><td>馬場貴也</td><td>滋賀</td><td class="score">1億541万円</td><td>G1大村・海の王者決定戦優勝</td></tr>
+        <tr><td>9</td><td>茅原悠紀</td><td>岡山</td><td class="score">9,469万円</td><td>G1尼崎センプルカップ優勝</td></tr>
+        <tr><td>10</td><td>新田雄史</td><td>三重</td><td class="score">8,831万円</td><td>G1東海地区選手権優勝</td></tr>
+        <tr><td>11</td><td>上條暢嵩</td><td>大阪</td><td class="score">8,795万円</td><td>賞金11位で圏内</td></tr>
+        <tr><td>12</td><td>毒島誠</td><td>群馬</td><td class="score">8,483万円</td><td>SG優勝通算10回</td></tr>
+        <tr><td>13</td><td>西山貴浩</td><td>福岡</td><td class="score">8,241万円</td><td>賞金13位で圏内</td></tr>
+        <tr><td>14</td><td>桐生順平</td><td>埼玉</td><td class="score">7,987万円</td><td>賞金14位で圏内</td></tr>
+        <tr><td>15</td><td>山口剛</td><td>広島</td><td class="score">7,966万円</td><td>賞金15位で圏内</td></tr>
+        <tr><td>16</td><td>上野真之介</td><td>佐賀</td><td class="score">7,947万円</td><td>賞金16位で圏内</td></tr>
+        <tr><td>17</td><td>宮地元輝</td><td>佐賀</td><td class="score">7,807万円</td><td>賞金17位で圏内</td></tr>
+        <tr><td>18</td><td>磯部誠</td><td>愛知</td><td class="score">7,558万円</td><td>賞金18位で圏内（ボーダー上）</td></tr>
+      </table>
+      <p class="note-small" style="margin-top:12px">全員A1級。賞金1〜6位はトライアル2ndから、7〜18位はトライアル1stから登場します。出典：強運ナビ 賞金ランキング（2026/11/20現在）。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>📊 全国勝率トップ10（男子）</h2>
+    <div class="panel">
+      <table>
+        <tr><th>順位</th><th>氏名</th><th>支部</th><th>全国勝率</th><th>2連対率</th></tr>
+        <tr><td>1</td><td>峰竜太</td><td>佐賀</td><td class="score">8.85</td><td>63.3%</td></tr>
+        <tr><td>2</td><td>山田康二</td><td>佐賀</td><td class="score">8.10</td><td>59.7%</td></tr>
+        <tr><td>3</td><td>篠崎元志</td><td>福岡</td><td class="score">7.97</td><td>62.6%</td></tr>
+        <tr><td>4</td><td>平田忠則</td><td>福岡</td><td class="score">7.89</td><td>70.9%</td></tr>
+        <tr><td>5</td><td>久田敏之</td><td>群馬</td><td class="score">7.86</td><td>58.8%</td></tr>
+        <tr><td>6</td><td>前田滉</td><td>愛知</td><td class="score">7.82</td><td>64.4%</td></tr>
+        <tr><td>7</td><td>毒島誠</td><td>群馬</td><td class="score">7.80</td><td>57.5%</td></tr>
+        <tr><td>8</td><td>西野雄貴</td><td>徳島</td><td class="score">7.78</td><td>67.3%</td></tr>
+        <tr><td>9</td><td>宮之原輝紀</td><td>東京</td><td class="score">7.76</td><td>64.2%</td></tr>
+        <tr><td>10</td><td>丸野一樹</td><td>滋賀</td><td class="score">7.74</td><td>50.0%</td></tr>
+      </table>
+      <p class="note-small" style="margin-top:12px">2027年前期適用勝率（集計期間：2026年5月1日〜10月31日、日本モーターボート競走会発表）。出典：艇愛ボートレースDB 最終集計。山田康二の公式発表値は8.03で、集計方法の違いにより本表の値と異なります。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>🔥 注目のA1選手 3名<span class="badge">AI研究部の独自選出</span></h2>
+    <div class="panel">
+      <table>
+        <tr><th>氏名</th><th>選出理由</th></tr>
+        <tr><td>峰竜太（佐賀）</td><td class="reason">勝率1位8.85（通算13回目の勝率1位）、獲得賞金も1位と全指標トップ。2026年はSG2冠にG1でも2勝と、年末グランプリの優勝候補筆頭。</td></tr>
+        <tr><td>山田康二（佐賀）</td><td class="reason">勝率2位で師匠・峰竜太と師弟ワンツー。11月1日のSGダービーでSG初優勝を果たし、賞金も3位まで伸ばした今期最大の躍進選手。</td></tr>
+        <tr><td>定松勇樹（佐賀）</td><td class="reason">獲得賞金2位は20代の若手世代では突出。SGオーシャンカップ優勝に加えG1でも複数優勝があり、世代交代の旗手として年末戦線の中心に。</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>🌸 女子の注目選手 3名<span class="badge">AI研究部の独自選出</span></h2>
+    <div class="panel">
+      <table>
+        <tr><th>氏名</th><th>女子勝率</th><th>選出理由</th></tr>
+        <tr><td>田口節子（岡山・A1）</td><td class="score">7.62（女子1位）</td><td class="reason">女子勝率トップは通算9回目で、全選手総合でも20位に入る数字（2連対率60.4%）。年末クイーンズクライマックスの中心選手。</td></tr>
+        <tr><td>遠藤エミ（滋賀・A1）</td><td class="score">7.32（女子2位）</td><td class="reason">獲得賞金6,751万円は男女混合ランキングでも30位に入る女子最高位。混合のグランプリ戦線と女子戦線の両方で存在感を示す。</td></tr>
+        <tr><td>大山千広（福岡）</td><td class="score">7.22（女子5位）</td><td class="reason">2026年年間女子勝率では1位の6.98。審査期間内は8優出4優勝の活躍で、2027年前期のA1級昇格を決めた勢いのある選手。</td></tr>
+      </table>
+      <p class="note-small" style="margin-top:12px">女子勝率は2027年前期適用（集計期間：2026年5月1日〜10月31日）の値です。</p>
+    </div>
+  </section>
+
+  <footer>
+    AI研究部｜AI予想の全レース検証データを毎日公開しています<br>
+    運営：AI研究部（AIを使用して運営しています）<br>
+    <a href="index.html">トップページ</a> ／ <a href="riders.html">競輪 選手データ</a> ／ <a href="https://note.com/calm_dbai">note</a> ／ <a href="https://x.com/nukodbai">X</a>
+  </footer>
+
+</div>
+</body>
+</html>
