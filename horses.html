@@ -46,7 +46,17 @@ nav.quick::-webkit-scrollbar{display:none}
 nav.quick a{flex-shrink:0;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--panel2);color:var(--text);text-decoration:none;font-size:.88rem;font-weight:600}
 nav.quick a:hover{border-color:var(--cyan)}
 nav.quick a.ext{border-color:var(--cyan);color:var(--cyan)}
-@media (max-width:640px){ table{font-size:.85rem} th,td{padding:6px} }
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tscroll table{min-width:620px}
+@media (max-width:640px){
+table{font-size:.85rem} th,td{padding:6px}
+.tscroll table{font-size:.9rem}
+table.stack thead,table.stack tr:first-child{display:none}
+table.stack tr{display:block;padding:12px 0;border-bottom:1px solid var(--line)}
+table.stack tr:last-child{border-bottom:none}
+table.stack td{display:block;border-bottom:none;padding:3px 0;width:100%}
+table.stack td:first-child{font-size:1.05rem;margin-bottom:4px}
+}
 </style>
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#0b0f1a">
@@ -95,6 +105,7 @@ nav.quick a.ext{border-color:var(--cyan);color:var(--cyan)}
 </div>
 <div class="panel" style="margin-top:14px">
 <p><strong>ジャパンカップ 登録馬18頭</strong>（2026年11月15日発表の登録馬ベースです。<strong>出走馬の正式確定は木曜</strong>で、騎手は現時点の想定です）</p>
+<div class="tscroll">
 <table style="margin-top:12px">
 <tr><th>馬名</th><th>区分</th><th>性齢</th><th>父</th><th>想定騎手</th><th>主な実績</th></tr>
 <tr><td>カランダガン</td><td>海外（仏）</td><td>セン5</td><td>Gleneagles</td><td>M.バルザローナ</td><td class="reason">前年のジャパンカップ覇者。G1・6勝</td></tr>
@@ -117,12 +128,13 @@ nav.quick a.ext{border-color:var(--cyan);color:var(--cyan)}
 <tr><td>ファイアンクランツ</td><td>日本</td><td>牡4</td><td>ドゥラメンテ</td><td>未定</td><td class="reason">―</td></tr>
 </table>
 </div>
+</div>
 </section>
 
 <section id="horses">
 <h2>🐴 注目馬（ジャパンカップ登録馬から）</h2>
 <div class="panel">
-<table>
+<table class="stack">
 <tr><th>馬名</th><th>脚質・特徴</th><th>データ</th></tr>
 <tr>
 <td><strong>カランダガン</strong><br><span class="reason">セン5・フランス調教馬<br>想定騎手：M.バルザローナ</span></td>
@@ -153,6 +165,7 @@ nav.quick a.ext{border-color:var(--cyan);color:var(--cyan)}
 <h2>🏆 勝率の高い騎手</h2>
 <div class="panel">
 <p>JRA騎手リーディング（2026年、障害戦を含みません）。出典：パンダズ競馬 騎手リーディング（2026年11月1日現在）。</p>
+<div class="tscroll">
 <table style="margin-top:12px">
 <tr><th colspan="5">勝利数トップ5</th></tr>
 <tr><th>順位</th><th>騎手</th><th>勝利数</th><th>騎乗数</th><th>勝率</th></tr>
@@ -171,6 +184,7 @@ nav.quick a.ext{border-color:var(--cyan);color:var(--cyan)}
 <tr><td>4</td><td>松山弘平</td><td class="score">16.7%</td><td>120勝</td><td>719</td></tr>
 <tr><td>5</td><td>坂井瑠星</td><td class="score">16.7%</td><td>89勝</td><td>533</td></tr>
 </table>
+</div>
 <p class="note-small" style="margin-top:12px">※ 勝率の表は、短期免許の外国人騎手など騎乗数の少ない騎手だと数字が上下しやすいため、年間200騎乗以上の騎手に絞っています。松山弘平と坂井瑠星は表示上、同率の16.7%です。<br>
 ※ この週末の重賞でも、ルメール（ジャパンカップのマスカレードボール）、川田将雅（京都2歳Sのネーロノワール）、坂井瑠星（ジャパンカップのエシカルダイヤモンド、京都2歳Sのゴールデンプロミス）など、上位の騎手が有力馬に騎乗する想定です（いずれも現時点の想定）。</p>
 </div>
