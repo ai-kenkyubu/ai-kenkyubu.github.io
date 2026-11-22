@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>競馬 重賞特集｜AI研究部</title>
+<meta name="description" content="AI研究部の競馬ページ。JRA重賞レースだけを対象にした検証（2026年11月28日開始）と、今週の重賞の注目馬・勝率の高い騎手のデータを掲載。毎週金曜更新。">
+<style>
+:root{
+--bg:#070b1a; --panel:#0e1530; --panel2:#111a3d;
+--cyan:#22d3ee; --violet:#a78bfa; --green:#34d399;
+--text:#e8ecf8; --muted:#9aa7c7; --line:#23305e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(900px 480px at 15% -80px,rgba(34,211,238,.14),transparent 60%),radial-gradient(900px 480px at 85% -80px,rgba(167,139,250,.14),transparent 60%),var(--bg);color:var(--text);font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;line-height:1.7}
+a{color:var(--cyan)}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px 64px}
+header.hero{padding:24px 0 8px;text-align:center}
+header.hero img{width:100%;border-radius:16px;border:1px solid var(--line)}
+.tagline{margin:20px 0 4px;font-size:1.05rem;color:var(--muted)}
+h1{font-size:2rem;letter-spacing:.05em}
+h1 .grad{background:linear-gradient(90deg,var(--cyan),var(--violet),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+section{margin-top:44px;scroll-margin-top:64px}
+h2{font-size:1.35rem;border-left:4px solid var(--cyan);padding-left:10px;margin-bottom:16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--green))}
+.card .label{color:var(--muted);font-size:.85rem}
+.card .value{font-size:1.25rem;font-weight:700;margin-top:4px}
+.card .sub{color:var(--muted);font-size:.85rem;margin-top:4px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+.score{font-weight:700;color:var(--green);white-space:nowrap}
+.reason{color:var(--muted);font-size:.9rem}
+.badge{display:inline-block;background:var(--panel2);border:1px solid var(--violet);color:var(--violet);border-radius:999px;padding:0 10px;font-size:.75rem;margin-left:8px}
+ul.rules{list-style:none}
+ul.rules li{padding:6px 0;border-bottom:1px dashed var(--line)}
+ul.rules li:last-child{border-bottom:none}
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;text-align:center}
+.note-small{color:var(--muted);font-size:.85rem}
+nav.quick{position:sticky;top:0;z-index:50;display:flex;gap:8px;overflow-x:auto;padding:10px 2px;background:rgba(7,11,26,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);scrollbar-width:none}
+nav.quick::-webkit-scrollbar{display:none}
+nav.quick a{flex-shrink:0;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--panel2);color:var(--text);text-decoration:none;font-size:.88rem;font-weight:600}
+nav.quick a:hover{border-color:var(--cyan)}
+nav.quick a.ext{border-color:var(--cyan);color:var(--cyan)}
+@media (max-width:640px){ table{font-size:.85rem} th,td{padding:6px} }
+</style>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0b0f1a">
+<link rel="apple-touch-icon" href="/icon-192.png">
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+<img src="eyecatch-keiba.webp" alt="AI研究部 KEIBA × HORSE RACE DATA LAB">
+<p class="tagline">2026年11月22日時点のデータです。毎週金曜日に更新します。</p>
+<h1>🐴 競馬 <span class="grad">重賞特集</span></h1>
+<p class="note-small">AI研究部の検証に競馬が加わります。対象はJRAの重賞レースだけ。<br>今週の重賞の注目馬と、勝率の高い騎手のデータをまとめています。</p>
+</header>
+
+<nav class="quick">
+<a href="/">🏠 トップ</a>
+<a href="/#dashboard">📊 成績</a>
+<a href="/#graphs">📈 グラフ</a>
+<a href="/#riders">🏆 選手データ</a>
+<a href="/horses.html">🐴 競馬</a>
+<a href="/live.html">📺 ライブ配信</a>
+<a class="ext" href="https://note.com/calm_dbai">📝 note</a>
+<a class="ext" href="https://x.com/nukodbai">𝕏 X</a>
+<a href="#rules">📏 ルール</a>
+</nav>
+
+<section id="races">
+<h2>🏇 今週の重賞（ジャパンカップ週）</h2>
+<div class="cards">
+<div class="card">
+<div class="label">11月29日（日）東京競馬場・芝2400m・15:40発走</div>
+<div class="value">第46回 ジャパンカップ（G1）</div>
+<div class="sub">3歳以上オープン・国際招待・定量。フルゲート18頭、1着賞金5億円。登録馬18頭のうちG1勝ち馬が12頭、海外からの参戦は6頭という顔ぶれです。前年の勝ち馬カランダガンの勝ち時計2分20秒3は、このコースのコースレコードです。</div>
+</div>
+<div class="card">
+<div class="label">11月28日（土）京都競馬場・芝2000m・15:40発走</div>
+<div class="value">第13回 京都2歳ステークス（G3）</div>
+<div class="sub">ラジオNIKKEI杯。2歳馬の中距離戦で、登録予定は11頭（11月20日時点の想定）。ドラゴンバルド、ネーロノワール、ゴールデンプロミスなどが名前を連ねています。前年の勝ち馬はジャスティンビスタでした。</div>
+</div>
+<div class="card">
+<div class="label">11月29日（日）京都競馬場・芝1200m・16:15発走</div>
+<div class="value">第71回 京阪杯（G3）</div>
+<div class="sub">3歳以上の短距離戦。登録予定は25頭（想定）で、フルゲート18頭を上回るため、出走できない馬も出る見込みです。前年覇者のエーティーマクフィ、2024年の勝ち馬ビッグシーザー、CBC賞を勝ったフロムダスクなどが登録しています。</div>
+</div>
+</div>
+<div class="panel" style="margin-top:14px">
+<p><strong>ジャパンカップ 登録馬18頭</strong>（2026年11月15日発表の登録馬ベースです。<strong>出走馬の正式確定は木曜</strong>で、騎手は現時点の想定です）</p>
+<table style="margin-top:12px">
+<tr><th>馬名</th><th>区分</th><th>性齢</th><th>父</th><th>想定騎手</th><th>主な実績</th></tr>
+<tr><td>カランダガン</td><td>海外（仏）</td><td>セン5</td><td>Gleneagles</td><td>M.バルザローナ</td><td class="reason">前年のジャパンカップ覇者。G1・6勝</td></tr>
+<tr><td>オンブズマン</td><td>海外（英）</td><td>牡5</td><td>Night of Thunder</td><td>W.ビュイック</td><td class="reason">G1・5勝。今年の英チャンピオンS優勝</td></tr>
+<tr><td>ダノンデサイル</td><td>日本</td><td>牡5</td><td>エピファネイア</td><td>戸崎圭太</td><td class="reason">2024年日本ダービー馬。今年の天皇賞（秋）優勝</td></tr>
+<tr><td>クロワデュノール</td><td>日本</td><td>牡4</td><td>キタサンブラック</td><td>C.デムーロ</td><td class="reason">2025年日本ダービー馬。今年の大阪杯・天皇賞（春）優勝</td></tr>
+<tr><td>マスカレードボール</td><td>日本</td><td>牡4</td><td>ドゥラメンテ</td><td>C.ルメール</td><td class="reason">前年の天皇賞（秋）優勝。前年のジャパンカップ2着</td></tr>
+<tr><td>メイショウタバル</td><td>日本</td><td>牡5</td><td>ゴールドシップ</td><td>武豊</td><td class="reason">宝塚記念を連覇</td></tr>
+<tr><td>ミニーホーク</td><td>海外（愛）</td><td>牝4</td><td>Frankel</td><td>R.ムーア</td><td class="reason">英愛オークスなどG1・4勝</td></tr>
+<tr><td>ゴリアット</td><td>海外（仏）</td><td>セン6</td><td>Adlerflug</td><td>C.スミヨン</td><td class="reason">2024年キングジョージ優勝</td></tr>
+<tr><td>エシカルダイヤモンド</td><td>海外（愛）</td><td>セン6</td><td>Awtaad</td><td>坂井瑠星</td><td class="reason">米BCターフ優勝</td></tr>
+<tr><td>アーバンシック</td><td>日本</td><td>牡5</td><td>スワーヴリチャード</td><td>A.プーシャン</td><td class="reason">2024年菊花賞馬</td></tr>
+<tr><td>ヘデントール</td><td>日本</td><td>牡5</td><td>ルーラーシップ</td><td>T.マーカンド</td><td class="reason">前年の天皇賞（春）優勝</td></tr>
+<tr><td>テアオ</td><td>海外（米）</td><td>牡4</td><td>Ya Primo</td><td>L.トーレス</td><td class="reason">ラテンアメリカ大賞優勝</td></tr>
+<tr><td>ヴェルテンベルク</td><td>日本</td><td>牡6</td><td>キタサンブラック</td><td>横山典弘</td><td class="reason">―</td></tr>
+<tr><td>エキサイトバイオ</td><td>日本</td><td>牡4</td><td>レイデオロ</td><td>荻野極</td><td class="reason">―</td></tr>
+<tr><td>コスモキュランダ</td><td>日本</td><td>牡5</td><td>アルアイン</td><td>丹内祐次</td><td class="reason">―</td></tr>
+<tr><td>シェイクユアハート</td><td>日本</td><td>牡6</td><td>ハーツクライ</td><td>古川吉洋</td><td class="reason">―</td></tr>
+<tr><td>タガノデュード</td><td>日本</td><td>牡5</td><td>ヤマカツエース</td><td>M.デムーロ</td><td class="reason">―</td></tr>
+<tr><td>ファイアンクランツ</td><td>日本</td><td>牡4</td><td>ドゥラメンテ</td><td>未定</td><td class="reason">―</td></tr>
+</table>
+</div>
+</section>
+
+<section id="horses">
+<h2>🐴 注目馬（ジャパンカップ登録馬から）</h2>
+<div class="panel">
+<table>
+<tr><th>馬名</th><th>脚質・特徴</th><th>データ</th></tr>
+<tr>
+<td><strong>カランダガン</strong><br><span class="reason">セン5・フランス調教馬<br>想定騎手：M.バルザローナ</span></td>
+<td class="reason">後方で脚をためて、直線で一気に差し切る末脚が持ち味。前年のジャパンカップはその末脚で制し、勝ち時計2分20秒3はコースレコードでした。日本の馬場で結果を出している点が、海外勢の中でも大きな材料です。</td>
+<td class="reason">G1・6勝。前年のジャパンカップ優勝後も、ドバイシーマクラシックとサンクルー大賞を勝ち、キングジョージと英チャンピオンSで2着と、海外の大レースで上位を続けています。</td>
+</tr>
+<tr>
+<td><strong>オンブズマン</strong><br><span class="reason">牡5・イギリス調教馬<br>想定騎手：W.ビュイック</span></td>
+<td class="reason">英国を代表する中距離馬の1頭。今年の登録海外勢では、カランダガンと並ぶ実績の持ち主です。日本の高速馬場への対応がどこまでかは、データの分かれ目になります。</td>
+<td class="reason">G1・5勝。今年10月の英チャンピオンSを制しています。海外勢6頭は全頭がG1勝ち馬で、G1の勝利数を合計すると23勝にのぼります。</td>
+</tr>
+<tr>
+<td><strong>ダノンデサイル</strong><br><span class="reason">牡5・栗東／安田翔伍厩舎<br>想定騎手：戸崎圭太</span></td>
+<td class="reason">2024年の日本ダービー馬で、東京芝2400mはそのダービーを勝った舞台です。今年の天皇賞（秋）は後方から差し切って制しました。過去10年のジャパンカップ勝ち馬は、前走で1着だった馬が10頭中7頭を占めており、前走G1勝ちのローテーションはデータ面でも主流です。</td>
+<td class="reason">G1・3勝（日本ダービー、ドバイシーマクラシック、天皇賞・秋）。今年11月1日の天皇賞（秋）優勝が直近の成績です。</td>
+</tr>
+<tr>
+<td><strong>クロワデュノール</strong><br><span class="reason">牡4・栗東／斉藤崇史厩舎<br>想定騎手：C.デムーロ</span></td>
+<td class="reason">先行して押し切る競馬ができるタイプで、2025年の日本ダービー馬。今年は大阪杯と天皇賞（春）を制し、春の古馬中長距離路線を2勝しました。父キタサンブラックは2016年のジャパンカップ勝ち馬です。</td>
+<td class="reason">G1・4勝。今回はG1・5勝目がかかります。登録した日本勢12頭の中でも、今年のG1勝利数が最上位クラスです。</td>
+</tr>
+</table>
+<p class="note-small" style="margin-top:12px">※ 注目馬は登録馬（11月15日発表）から選んでいます。出走馬は木曜に正式確定するため、顔ぶれが変わる場合があります。</p>
+</div>
+</section>
+
+<section id="jockeys">
+<h2>🏆 勝率の高い騎手</h2>
+<div class="panel">
+<p>JRA騎手リーディング（2026年、障害戦を含みません）。出典：パンダズ競馬 騎手リーディング（2026年11月1日現在）。</p>
+<table style="margin-top:12px">
+<tr><th colspan="5">勝利数トップ5</th></tr>
+<tr><th>順位</th><th>騎手</th><th>勝利数</th><th>騎乗数</th><th>勝率</th></tr>
+<tr><td>1</td><td>C.ルメール</td><td class="score">147勝</td><td>495</td><td>29.7%</td></tr>
+<tr><td>2</td><td>岩田望来</td><td class="score">124勝</td><td>659</td><td>18.8%</td></tr>
+<tr><td>3</td><td>松山弘平</td><td class="score">120勝</td><td>719</td><td>16.7%</td></tr>
+<tr><td>4</td><td>横山武史</td><td class="score">100勝</td><td>668</td><td>15.0%</td></tr>
+<tr><td>5</td><td>川田将雅</td><td class="score">91勝</td><td>432</td><td>21.1%</td></tr>
+</table>
+<table style="margin-top:20px">
+<tr><th colspan="5">勝率トップ5（年間200騎乗以上の騎手）</th></tr>
+<tr><th>順位</th><th>騎手</th><th>勝率</th><th>勝利数</th><th>騎乗数</th></tr>
+<tr><td>1</td><td>C.ルメール</td><td class="score">29.7%</td><td>147勝</td><td>495</td></tr>
+<tr><td>2</td><td>川田将雅</td><td class="score">21.1%</td><td>91勝</td><td>432</td></tr>
+<tr><td>3</td><td>岩田望来</td><td class="score">18.8%</td><td>124勝</td><td>659</td></tr>
+<tr><td>4</td><td>松山弘平</td><td class="score">16.7%</td><td>120勝</td><td>719</td></tr>
+<tr><td>5</td><td>坂井瑠星</td><td class="score">16.7%</td><td>89勝</td><td>533</td></tr>
+</table>
+<p class="note-small" style="margin-top:12px">※ 勝率の表は、短期免許の外国人騎手など騎乗数の少ない騎手だと数字が上下しやすいため、年間200騎乗以上の騎手に絞っています。松山弘平と坂井瑠星は表示上、同率の16.7%です。<br>
+※ この週末の重賞でも、ルメール（ジャパンカップのマスカレードボール）、川田将雅（京都2歳Sのネーロノワール）、坂井瑠星（ジャパンカップのエシカルダイヤモンド、京都2歳Sのゴールデンプロミス）など、上位の騎手が有力馬に騎乗する想定です（いずれも現時点の想定）。</p>
+</div>
+</section>
+
+<section id="rules">
+<h2>📏 競馬検証のルール</h2>
+<div class="panel">
+<ul class="rules">
+<li>🎯 対象はJRAの<strong>重賞レースのみ</strong>（G1・G2・G3）です。一般レースは対象にしません。</li>
+<li>🗓️ 検証は<strong>2026年11月28日（ジャパンカップ週）から開始</strong>します。予想は週末の朝に公開し、レース後に答え合わせします。</li>
+<li>📊 予想は<strong>三連単＋馬連</strong>。全買い目を100円ずつ買った想定のシミュレーションで、的中率と回収率を集計します。</li>
+<li>🔍 外れたレースも隠さず、的中率・回収率をそのまま公開します。</li>
+<li>🚫 これは検証データの公開であり、<strong>買い推奨ではありません</strong>。「当たる」「勝てる」といった約束はしません。</li>
+</ul>
+</div>
+</section>
+
+<footer>
+AI研究部｜AI予想の全レース検証データを毎日公開しています<br>
+運営：AI研究部（AIを使用して運営しています）<br>
+<a href="index.html">トップページ</a> ／ <a href="https://note.com/calm_dbai">note</a> ／ <a href="https://x.com/nukodbai">X</a>
+</footer>
+
+</div>
+<script data-goatcounter="https://ai-kenkyubu.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
