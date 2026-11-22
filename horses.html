@@ -41,9 +41,9 @@ ul.rules li{padding:6px 0;border-bottom:1px dashed var(--line)}
 ul.rules li:last-child{border-bottom:none}
 footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;text-align:center}
 .note-small{color:var(--muted);font-size:.85rem}
-nav.quick{position:sticky;top:0;z-index:50;display:flex;gap:8px;overflow-x:auto;padding:10px 2px;background:rgba(7,11,26,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);scrollbar-width:none}
+nav.quick{position:sticky;top:0;z-index:50;display:flex;flex-wrap:wrap;gap:8px;padding:10px 2px;background:rgba(7,11,26,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 nav.quick::-webkit-scrollbar{display:none}
-nav.quick a{flex-shrink:0;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--panel2);color:var(--text);text-decoration:none;font-size:.88rem;font-weight:600}
+nav.quick a{flex:1 1 30%;text-align:center;padding:9px 6px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);color:var(--text);text-decoration:none;font-size:.88rem;font-weight:600}
 nav.quick a:hover{border-color:var(--cyan)}
 nav.quick a.ext{border-color:var(--cyan);color:var(--cyan)}
 .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
