@@ -71,6 +71,23 @@ section{scroll-margin-top:64px}
 .gdetails{margin-top:10px}.gdetails summary{cursor:pointer;color:var(--hatch-widget-accent,#22d3ee);font-weight:700;padding:8px 4px}
 .bmore{font-size:11px;opacity:.75;white-space:nowrap}.bdetail{padding:6px 10px 10px 54px;font-size:13px;line-height:1.7;opacity:.92}
 a.browlink{display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit}
+/* === motion & portal links (added 2026-11-24) === */
+.ticker{background:#05070d;border:1px solid var(--line);border-radius:10px;overflow:hidden;white-space:nowrap;padding:7px 0;font-size:.82rem;color:var(--muted);margin-bottom:14px}
+.ticker-track{display:inline-block;animation:tickmove 30s linear infinite}
+.ticker b{color:var(--cyan)}
+.ticker a{color:var(--lime);font-weight:700;text-decoration:none}
+@keyframes tickmove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.reveal.on{opacity:1;transform:none}
+.bfill{transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.cards .card{transition:transform .25s ease,border-color .25s ease}
+.cards .card:hover{transform:translateY(-4px)}
+.rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.rel-grid{grid-template-columns:1fr}}
+.rel-card{display:block;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;color:var(--text);text-decoration:none;transition:transform .25s ease,border-color .25s ease}
+.rel-card:hover{transform:translateY(-3px);border-color:var(--cyan)}
+.rel-card b{display:block;font-size:1rem;margin-bottom:4px}
+.rel-card span{color:var(--muted);font-size:.85rem}
 </style>
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#0b0f1a">
@@ -78,6 +95,8 @@ a.browlink{display:flex;align-items:center;gap:8px;text-decoration:none;color:in
 </head>
 <body>
 <div class="wrap">
+
+<div class="ticker"><div class="ticker-track" id="tickerTrack"><span>🚴 競輪・🚤 競艇の全レース検証を <b>毎日公開中</b>　・　🐴 競馬は重賞のみ検証（次は11/28 京都2歳S、11/29 ジャパンカップ）　・　🧪 新実験サイト「白黒ラボ」公開中 ― AIだけでメディア運営に挑戦しています → <a href="/shirokuro-lab/">白黒ラボを見る</a>　・　🏠 AI研究部の玄関はこちら → <a href="/portal/">ポータル</a>　・　</span></div></div>
 
 <header class="hero">
 <img src="banner.webp" alt="AI研究部 KEIRIN × BOAT RACE DATA LAB">
@@ -94,6 +113,7 @@ a.browlink{display:flex;align-items:center;gap:8px;text-decoration:none;color:in
 <a href="/live.html">📺 ライブ配信</a>
 <a class="ext" href="https://note.com/calm_dbai">📝 note</a>
 <a class="ext" href="https://x.com/nukodbai">X</a>
+<a href="/portal/">🏠 ポータル</a>
 <a href="#rules">📏 ルール</a>
 </nav>
 
@@ -122,7 +142,7 @@ a.browlink{display:flex;align-items:center;gap:8px;text-decoration:none;color:in
 <p class="note-small" style="margin-top:8px">※ 2026年11月22日時点の累計。毎晩の検証で更新します。</p>
 </section>
 
-<section>
+<section id="boat">
 <h2>🚤 競艇ダッシュボード</h2>
 <div class="cards">
 <div class="card"><div class="label">🏁 検証レース数（累計）</div><div class="value">267</div><div class="sub">2026/11/21 開始</div></div>
@@ -281,9 +301,11 @@ a.browlink{display:flex;align-items:center;gap:8px;text-decoration:none;color:in
 </section>
 
 <section>
-<h2>📢 お知らせ</h2>
-<!-- 広告枠：アフィリエイト等を導入する場合はここに「広告」表記つきで設置する -->
-<div class="ad-slot">広告枠（準備中）</div>
+<h2>🧪 関連プロジェクト</h2>
+<div class="rel-grid">
+<a class="rel-card" href="/shirokuro-lab/"><b>🧪 白黒ラボ｜日常のモヤモヤ数値化研究所</b><span>AIだけで運営する検証サイト。「日常の損得問題をデータと試算で白黒つける」がテーマ。人は承認だけ ― メディアはAIだけで回るのかの実験です。</span></a>
+<a class="rel-card" href="/portal/"><b>🏠 AI研究部ポータル</b><span>AI研究部の玄関。AIで何ができて、どんな可能性があるのか ― 進行中の実験と、その「なぜ」をまとめています。</span></a>
+</div>
 </section>
 
 <footer>
@@ -293,5 +315,35 @@ AI研究部｜AI予想の全レース検証データを毎日公開していま�
 
 </div>
 <script data-goatcounter="https://ai-kenkyubu.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+(function(){
+  // ticker: duplicate for seamless loop
+  var t=document.getElementById('tickerTrack');
+  if(t){ t.innerHTML+=t.innerHTML; }
+  // reveal on scroll (sections)
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target);} });},{threshold:.08});
+  document.querySelectorAll('section').forEach(function(s){ s.classList.add('reveal'); io.observe(s); });
+  // count-up for dashboard values (reads current text each load, so daily updates stay valid)
+  function countUp(el){
+    var orig=el.textContent.trim();
+    var m=orig.match(/^([\d,]+(?:\.\d+)?)(.*)$/);
+    if(!m) return;
+    var to=parseFloat(m[1].replace(/,/g,'')), suf=m[2]||'';
+    var dec=(m[1].indexOf('.')>=0)?1:0, t0=performance.now();
+    function step(now){ var p=Math.min((now-t0)/1100,1); var v=to*(1-Math.pow(1-p,3));
+      el.textContent=(dec? v.toFixed(1) : Math.round(v).toLocaleString())+suf;
+      if(p<1) requestAnimationFrame(step); else el.textContent=orig; }
+    requestAnimationFrame(step);
+  }
+  var io2=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ countUp(e.target); io2.unobserve(e.target);} });},{threshold:.4});
+  document.querySelectorAll('.card .value, .h-item .v').forEach(function(el){ io2.observe(el); });
+  // bar grow animation
+  var fills=document.querySelectorAll('.bfill');
+  fills.forEach(function(f){ f.dataset.w=f.style.width; f.style.width='0%'; });
+  var g=document.getElementById('graphs');
+  if(g){ var io3=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ fills.forEach(function(f){ f.style.width=f.dataset.w; }); io3.disconnect(); } });},{threshold:.15});
+    io3.observe(g); }
+})();
+</script>
 </body>
 </html>
