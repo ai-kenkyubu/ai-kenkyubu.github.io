@@ -89,6 +89,24 @@ a.browlink{display:flex;align-items:center;gap:8px;text-decoration:none;color:in
 .rel-card b{display:block;font-size:1rem;margin-bottom:4px}
 .rel-card span{color:var(--muted);font-size:.85rem}
 .ic{width:1.05em;height:1.05em;vertical-align:-.17em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* responsive polish 2026-11-24 */
+img{max-width:100%}
+html,body{overflow-x:clip}
+@media(max-width:640px){
+.cards{grid-template-columns:1fr 1fr;gap:9px}
+.card{padding:11px 12px}
+.card .value{font-size:1.38rem}
+.highlight .h-grid{grid-template-columns:1fr 1fr;gap:9px}
+.links{grid-template-columns:1fr}
+.riders{grid-template-columns:1fr}
+.brow{gap:7px}
+.bdate{width:38px;font-size:.78rem}
+.bval{width:50px;font-size:.82rem}
+h1{font-size:1.5rem}
+h2{font-size:1.18rem}
+nav.quick a{padding:10px 4px;font-size:.84rem}
+}
 </style>
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#0b0f1a">
