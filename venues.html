@@ -42,7 +42,7 @@
 
   .vgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   @media(max-width:760px){.vgrid{grid-template-columns:1fr}}
-  .vcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .vcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:0}
   .vcard h3{font-size:1.05rem;margin-bottom:8px}
   .vcard h3 a{color:var(--text);text-decoration:none}
   .specs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
@@ -53,6 +53,17 @@
   .feat{font-size:.92rem}
   .sumtable{font-size:.88rem}
   .sumtable td.num,.sumtable th.num{text-align:right}
+
+  .vcard summary{list-style:none}
+  .vsum{display:flex;align-items:center;gap:10px;padding:15px 18px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .vsum::-webkit-details-marker{display:none}
+  .vsum:hover .vname{color:var(--cyan)}
+  .vname{font-size:1.05rem;font-weight:700;line-height:1.4}
+  .vkeys{margin-left:auto;text-align:right;color:var(--muted);font-size:.8rem;line-height:1.5;white-space:nowrap}
+  @media(max-width:640px){.vkeys{white-space:normal}}
+  .chev{color:var(--cyan);transition:transform .25s ease}
+  details[open ] .chev{transform:rotate(180deg)}
+  .vbody{padding:2px 18px 16px}
 
 </style>
 <link rel="manifest" href="/manifest.json">
@@ -90,222 +101,265 @@
   <section>
     <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.5" cy="16.5" r="3.4"/><circle cx="18.5" cy="16.5" r="3.4"/><path d="M5.5 16.5L9.8 8.5h5.7l3 8"/><path d="M9.8 8.5L12.3 16.5h6.2"/><path d="M8.2 6h3.2"/></svg> 競輪場 詳細</h2>
     <div class="vgrid">
-      <div class="vcard" id="k-hakodate">
-      <h3>函館競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>51.3m</b></span><span class="chip">カント <b>30°36′51″</b></span></div>
+      <details class="vcard" id="k-hakodate">
+      <summary class="vsum"><span class="vname">函館競輪場</span><span class="vkeys">400m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>51.3m</b></span><span class="chip">カント <b>30°36′51″</b></span></div>
       <p class="feat">標準的な400mバンク。海に近く、風の影響を受ける日がある。現在はバンク改修のため長期休催中。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-aomori">
-      <h3>青森競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>58.9m</b></span><span class="chip">カント <b>32°15′07″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-aomori">
+      <summary class="vsum"><span class="vname">青森競輪場</span><span class="vkeys">400m ・ 7レース ・ 平均 3,147円 ・ 万車券 0.0%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>58.9m</b></span><span class="chip">カント <b>32°15′07″</b></span></div>
       <p class="feat">直線が長めでカントもややきつい。差しや追い込みが届きやすい形のバンク。冬季は降雪のため休催期間がある。</p>
       <table class="stats"><tr><th>対象レース</th><td>7レース</td><th>三連単 平均配当</th><td>3,147円</td></tr><tr><th>三連単 中央値</th><td>2,150円</td><th>万車券率</th><td>0.0%</td></tr><tr><th>最高配当</th><td colspan="3">8,150円</td></tr></table>
-    </div><div class="vcard" id="k-iwakitaira">
-      <h3>いわき平競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>62.7m</b></span><span class="chip">カント <b>32°54′54″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-iwakitaira">
+      <summary class="vsum"><span class="vname">いわき平競輪場</span><span class="vkeys">400m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>62.7m</b></span><span class="chip">カント <b>32°54′54″</b></span></div>
       <p class="feat">構造物の上に設けられた「空中バンク」として知られる。直線が長く、差しが決まりやすい。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-yahiko">
-      <h3>弥彦競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>63.1m</b></span><span class="chip">カント <b>32°24′17″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-yahiko">
+      <summary class="vsum"><span class="vname">弥彦競輪場</span><span class="vkeys">400m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>63.1m</b></span><span class="chip">カント <b>32°24′17″</b></span></div>
       <p class="feat">直線は400mバンクで最長クラス。4コーナーの緩和曲線の取り方にクセがある。日本で唯一の村営の公営競技場。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-maebashi">
-      <h3>前橋競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>335m</b></span><span class="chip">みなし直線 <b>46.7m</b></span><span class="chip">カント <b>36°00′00″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-maebashi">
+      <summary class="vsum"><span class="vname">前橋競輪場</span><span class="vkeys">335m ・ 9レース ・ 平均 14,956円 ・ 万車券 22.2%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>335m</b></span><span class="chip">みなし直線 <b>46.7m</b></span><span class="chip">カント <b>36°00′00″</b></span></div>
       <p class="feat">屋内ドーム型。カント36°は現行の競輪場で最大とされる。335mの小回りで、先行が有利になりやすい。</p>
       <table class="stats"><tr><th>対象レース</th><td>9レース</td><th>三連単 平均配当</th><td>14,956円</td></tr><tr><th>三連単 中央値</th><td>250円</td><th>万車券率</th><td>22.2%</td></tr><tr><th>最高配当</th><td colspan="3">112,910円</td></tr></table>
-    </div><div class="vcard" id="k-toride">
-      <h3>取手競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>54.8m</b></span><span class="chip">カント <b>31°30′25″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-toride">
+      <summary class="vsum"><span class="vname">取手競輪場</span><span class="vkeys">400m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>54.8m</b></span><span class="chip">カント <b>31°30′25″</b></span></div>
       <p class="feat">クセの少ない走りやすいバンク。カントはややきつめ。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-utsunomiya">
-      <h3>宇都宮競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>500m</b></span><span class="chip">みなし直線 <b>63.3m</b></span><span class="chip">カント <b>25°47′44″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-utsunomiya">
+      <summary class="vsum"><span class="vname">宇都宮競輪場</span><span class="vkeys">500m ・ 38レース ・ 平均 7,962円 ・ 万車券 15.8%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>500m</b></span><span class="chip">みなし直線 <b>63.3m</b></span><span class="chip">カント <b>25°47′44″</b></span></div>
       <p class="feat">500mの大バンク。カントが緩く扁平な形状で、直線は長め。</p>
       <table class="stats"><tr><th>対象レース</th><td>38レース</td><th>三連単 平均配当</th><td>7,962円</td></tr><tr><th>三連単 中央値</th><td>3,605円</td><th>万車券率</th><td>15.8%</td></tr><tr><th>最高配当</th><td colspan="3">62,130円</td></tr></table>
-    </div><div class="vcard" id="k-omiya">
-      <h3>大宮競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>500m</b></span><span class="chip">みなし直線 <b>66.7m</b></span><span class="chip">カント <b>26°16′40″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-omiya">
+      <summary class="vsum"><span class="vname">大宮競輪場</span><span class="vkeys">500m ・ 21レース ・ 平均 7,741円 ・ 万車券 14.3%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>500m</b></span><span class="chip">みなし直線 <b>66.7m</b></span><span class="chip">カント <b>26°16′40″</b></span></div>
       <p class="feat">みなし直線66.7mは全国最長で、追い込み有利の代表格。日本で最初に完成した競輪場。</p>
       <table class="stats"><tr><th>対象レース</th><td>21レース</td><th>三連単 平均配当</th><td>7,741円</td></tr><tr><th>三連単 中央値</th><td>4,820円</td><th>万車券率</th><td>14.3%</td></tr><tr><th>最高配当</th><td colspan="3">40,480円</td></tr></table>
-    </div><div class="vcard" id="k-seibuen">
-      <h3>西武園競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>47.6m</b></span><span class="chip">カント <b>29°26′54″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-seibuen">
+      <summary class="vsum"><span class="vname">西武園競輪場</span><span class="vkeys">400m ・ 30レース ・ 平均 30,475円 ・ 万車券 30.0%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>47.6m</b></span><span class="chip">カント <b>29°26′54″</b></span></div>
       <p class="feat">400mバンクの中では直線が短くカントも浅い。逃げや先行が残りやすい。</p>
       <table class="stats"><tr><th>対象レース</th><td>30レース</td><th>三連単 平均配当</th><td>30,475円</td></tr><tr><th>三連単 中央値</th><td>3,520円</td><th>万車券率</th><td>30.0%</td></tr><tr><th>最高配当</th><td colspan="3">394,620円</td></tr></table>
-    </div><div class="vcard" id="k-keiokaku">
-      <h3>京王閣競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>51.5m</b></span><span class="chip">カント <b>32°10′34″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-keiokaku">
+      <summary class="vsum"><span class="vname">京王閣競輪場</span><span class="vkeys">400m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>51.5m</b></span><span class="chip">カント <b>32°10′34″</b></span></div>
       <p class="feat">直線の長さ・カントとも標準的で、クセの少ないバンク。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-tachikawa">
-      <h3>立川競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>58.0m</b></span><span class="chip">カント <b>31°13′06″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-tachikawa">
+      <summary class="vsum"><span class="vname">立川競輪場</span><span class="vkeys">400m ・ 36レース ・ 平均 62,055円 ・ 万車券 47.2%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>58.0m</b></span><span class="chip">カント <b>31°13′06″</b></span></div>
       <p class="feat">直線が長く、追い込みが有利とされるバンク。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>三連単 平均配当</th><td>62,055円</td></tr><tr><th>三連単 中央値</th><td>9,390円</td><th>万車券率</th><td>47.2%</td></tr><tr><th>最高配当</th><td colspan="3">1,643,810円</td></tr></table>
-    </div><div class="vcard" id="k-matsudo">
-      <h3>松戸競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>333m</b></span><span class="chip">みなし直線 <b>38.2m</b></span><span class="chip">カント <b>29°44′42″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-matsudo">
+      <summary class="vsum"><span class="vname">松戸競輪場</span><span class="vkeys">333m ・ 38レース ・ 平均 8,685円 ・ 万車券 21.1%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>333m</b></span><span class="chip">みなし直線 <b>38.2m</b></span><span class="chip">カント <b>29°44′42″</b></span></div>
       <p class="feat">333mの小回り。直線が短くカントも浅いため、逃げが有利になりやすい。</p>
       <table class="stats"><tr><th>対象レース</th><td>38レース</td><th>三連単 平均配当</th><td>8,685円</td></tr><tr><th>三連単 中央値</th><td>5,450円</td><th>万車券率</th><td>21.1%</td></tr><tr><th>最高配当</th><td colspan="3">94,910円</td></tr></table>
-    </div><div class="vcard" id="k-chiba">
-      <h3>千葉競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>250m</b></span><span class="chip">みなし直線 <b>―</b></span><span class="chip">カント <b>―</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-chiba">
+      <summary class="vsum"><span class="vname">千葉競輪場</span><span class="vkeys">250m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>250m</b></span><span class="chip">みなし直線 <b>―</b></span><span class="chip">カント <b>―</b></span></div>
       <p class="feat">1周250mの屋内木製バンク（TIPSTAR DOME CHIBA）。超小回りで、他場とはレース展開が大きく異なる。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-kawasaki">
-      <h3>川崎競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>58.0m</b></span><span class="chip">カント <b>32°10′14″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-kawasaki">
+      <summary class="vsum"><span class="vname">川崎競輪場</span><span class="vkeys">400m ・ 36レース ・ 平均 15,526円 ・ 万車券 25.0%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>58.0m</b></span><span class="chip">カント <b>32°10′14″</b></span></div>
       <p class="feat">オーソドックスな400mバンク。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>三連単 平均配当</th><td>15,526円</td></tr><tr><th>三連単 中央値</th><td>4,005円</td><th>万車券率</th><td>25.0%</td></tr><tr><th>最高配当</th><td colspan="3">299,320円</td></tr></table>
-    </div><div class="vcard" id="k-hiratsuka">
-      <h3>平塚競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>54.2m</b></span><span class="chip">カント <b>31°28′37″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-hiratsuka">
+      <summary class="vsum"><span class="vname">平塚競輪場</span><span class="vkeys">400m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>54.2m</b></span><span class="chip">カント <b>31°28′37″</b></span></div>
       <p class="feat">直線の長さもカントも標準的で、クセのない走路。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-odawara">
-      <h3>小田原競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>333m</b></span><span class="chip">みなし直線 <b>36.1m</b></span><span class="chip">カント <b>35°34′12″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-odawara">
+      <summary class="vsum"><span class="vname">小田原競輪場</span><span class="vkeys">333m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>333m</b></span><span class="chip">みなし直線 <b>36.1m</b></span><span class="chip">カント <b>35°34′12″</b></span></div>
       <p class="feat">みなし直線は全国最短クラス、カントは全国屈指の急傾斜。先行有利の小回りバンク。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-ito">
-      <h3>伊東温泉競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>333m</b></span><span class="chip">みなし直線 <b>46.6m</b></span><span class="chip">カント <b>34°41′09″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-ito">
+      <summary class="vsum"><span class="vname">伊東温泉競輪場</span><span class="vkeys">333m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>333m</b></span><span class="chip">みなし直線 <b>46.6m</b></span><span class="chip">カント <b>34°41′09″</b></span></div>
       <p class="feat">333mバンクながら直線が長く、400mバンクに近い感覚で走れる走路。カントはきつい。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-shizuoka">
-      <h3>静岡競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>56.4m</b></span><span class="chip">カント <b>30°43′22″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-shizuoka">
+      <summary class="vsum"><span class="vname">静岡競輪場</span><span class="vkeys">400m ・ 33レース ・ 平均 10,492円 ・ 万車券 27.3%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>56.4m</b></span><span class="chip">カント <b>30°43′22″</b></span></div>
       <p class="feat">走路にクセがなく、平均的な400mバンク。</p>
       <table class="stats"><tr><th>対象レース</th><td>33レース</td><th>三連単 平均配当</th><td>10,492円</td></tr><tr><th>三連単 中央値</th><td>3,410円</td><th>万車券率</th><td>27.3%</td></tr><tr><th>最高配当</th><td colspan="3">113,290円</td></tr></table>
-    </div><div class="vcard" id="k-nagoya">
-      <h3>名古屋競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>58.8m</b></span><span class="chip">カント <b>34°01′47″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-nagoya">
+      <summary class="vsum"><span class="vname">名古屋競輪場</span><span class="vkeys">400m ・ 36レース ・ 平均 14,522円 ・ 万車券 16.7%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>58.8m</b></span><span class="chip">カント <b>34°01′47″</b></span></div>
       <p class="feat">カントは立っているがクセが少なく、どの戦法でも力を発揮しやすいバンク。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>三連単 平均配当</th><td>14,522円</td></tr><tr><th>三連単 中央値</th><td>1,640円</td><th>万車券率</th><td>16.7%</td></tr><tr><th>最高配当</th><td colspan="3">274,710円</td></tr></table>
-    </div><div class="vcard" id="k-gifu">
-      <h3>岐阜競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>59.3m</b></span><span class="chip">カント <b>32°15′07″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-gifu">
+      <summary class="vsum"><span class="vname">岐阜競輪場</span><span class="vkeys">400m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>59.3m</b></span><span class="chip">カント <b>32°15′07″</b></span></div>
       <p class="feat">400mバンクとしては直線が長く、カントもきつい。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-ogaki">
-      <h3>大垣競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>56.0m</b></span><span class="chip">カント <b>30°37′08″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-ogaki">
+      <summary class="vsum"><span class="vname">大垣競輪場</span><span class="vkeys">400m ・ 30レース ・ 平均 8,157円 ・ 万車券 20.0%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>56.0m</b></span><span class="chip">カント <b>30°37′08″</b></span></div>
       <p class="feat">年間を通して伊吹おろしが吹き、風の影響が大きいバンク。</p>
       <table class="stats"><tr><th>対象レース</th><td>30レース</td><th>三連単 平均配当</th><td>8,157円</td></tr><tr><th>三連単 中央値</th><td>4,185円</td><th>万車券率</th><td>20.0%</td></tr><tr><th>最高配当</th><td colspan="3">66,420円</td></tr></table>
-    </div><div class="vcard" id="k-toyohashi">
-      <h3>豊橋競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>60.3m</b></span><span class="chip">カント <b>33°50′22″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-toyohashi">
+      <summary class="vsum"><span class="vname">豊橋競輪場</span><span class="vkeys">400m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>60.3m</b></span><span class="chip">カント <b>33°50′22″</b></span></div>
       <p class="feat">直線が長め。冬から春はバックストレッチで向かい風になることが多い。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-toyama">
-      <h3>富山競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>333m</b></span><span class="chip">みなし直線 <b>43.0m</b></span><span class="chip">カント <b>33°41′24″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-toyama">
+      <summary class="vsum"><span class="vname">富山競輪場</span><span class="vkeys">333m ・ 69レース ・ 平均 12,789円 ・ 万車券 24.6%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>333m</b></span><span class="chip">みなし直線 <b>43.0m</b></span><span class="chip">カント <b>33°41′24″</b></span></div>
       <p class="feat">先行有利の小回りバンク。冬季は降雪のため休催期間がある。</p>
       <table class="stats"><tr><th>対象レース</th><td>69レース</td><th>三連単 平均配当</th><td>12,789円</td></tr><tr><th>三連単 中央値</th><td>4,260円</td><th>万車券率</th><td>24.6%</td></tr><tr><th>最高配当</th><td colspan="3">180,900円</td></tr></table>
-    </div><div class="vcard" id="k-matsusaka">
-      <h3>松阪競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>61.5m</b></span><span class="chip">カント <b>34°25′29″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-matsusaka">
+      <summary class="vsum"><span class="vname">松阪競輪場</span><span class="vkeys">400m ・ 18レース ・ 平均 9,662円 ・ 万車券 22.2%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>61.5m</b></span><span class="chip">カント <b>34°25′29″</b></span></div>
       <p class="feat">マッコーネル緩和曲線でクセは少ないが、カントはきつい。</p>
       <table class="stats"><tr><th>対象レース</th><td>18レース</td><th>三連単 平均配当</th><td>9,662円</td></tr><tr><th>三連単 中央値</th><td>4,915円</td><th>万車券率</th><td>22.2%</td></tr><tr><th>最高配当</th><td colspan="3">49,850円</td></tr></table>
-    </div><div class="vcard" id="k-yokkaichi">
-      <h3>四日市競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>62.4m</b></span><span class="chip">カント <b>32°15′07″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-yokkaichi">
+      <summary class="vsum"><span class="vname">四日市競輪場</span><span class="vkeys">400m ・ 24レース ・ 平均 4,462円 ・ 万車券 20.8%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>62.4m</b></span><span class="chip">カント <b>32°15′07″</b></span></div>
       <p class="feat">直線が長く、海に近いため風の影響を受けやすい。ホーム側の幅が広い。</p>
       <table class="stats"><tr><th>対象レース</th><td>24レース</td><th>三連単 平均配当</th><td>4,462円</td></tr><tr><th>三連単 中央値</th><td>1,845円</td><th>万車券率</th><td>20.8%</td></tr><tr><th>最高配当</th><td colspan="3">15,440円</td></tr></table>
-    </div><div class="vcard" id="k-fukui">
-      <h3>福井競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>52.8m</b></span><span class="chip">カント <b>31°28′37″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-fukui">
+      <summary class="vsum"><span class="vname">福井競輪場</span><span class="vkeys">400m ・ 38レース ・ 平均 10,801円 ・ 万車券 18.4%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>52.8m</b></span><span class="chip">カント <b>31°28′37″</b></span></div>
       <p class="feat">クセが少なく、逃げ・差し・捲りが均等に決まるとされるバンク。冬季は降雪のため休催期間がある。</p>
       <table class="stats"><tr><th>対象レース</th><td>38レース</td><th>三連単 平均配当</th><td>10,801円</td></tr><tr><th>三連単 中央値</th><td>3,435円</td><th>万車券率</th><td>18.4%</td></tr><tr><th>最高配当</th><td colspan="3">151,730円</td></tr></table>
-    </div><div class="vcard" id="k-nara">
-      <h3>奈良競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>333m</b></span><span class="chip">みなし直線 <b>38.0m</b></span><span class="chip">カント <b>33°25′47″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-nara">
+      <summary class="vsum"><span class="vname">奈良競輪場</span><span class="vkeys">333m ・ 36レース ・ 平均 10,643円 ・ 万車券 27.8%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>333m</b></span><span class="chip">みなし直線 <b>38.0m</b></span><span class="chip">カント <b>33°25′47″</b></span></div>
       <p class="feat">円形に近い形状の333mバンクで、カントは33°超ときつい。先行が有利になりやすい。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>三連単 平均配当</th><td>10,643円</td></tr><tr><th>三連単 中央値</th><td>2,185円</td><th>万車券率</th><td>27.8%</td></tr><tr><th>最高配当</th><td colspan="3">76,880円</td></tr></table>
-    </div><div class="vcard" id="k-mukomachi">
-      <h3>京都向日町競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>47.3m</b></span><span class="chip">カント <b>30°29′07″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-mukomachi">
+      <summary class="vsum"><span class="vname">京都向日町競輪場</span><span class="vkeys">400m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>47.3m</b></span><span class="chip">カント <b>30°29′07″</b></span></div>
       <p class="feat">マッコーネル曲線のスタンダードなバンク（数値は改修前の仕様）。現在はスタンド建て替えを含む大規模改修のため長期休催中。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-wakayama">
-      <h3>和歌山競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>59.9m</b></span><span class="chip">カント <b>32°15′07″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-wakayama">
+      <summary class="vsum"><span class="vname">和歌山競輪場</span><span class="vkeys">400m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>59.9m</b></span><span class="chip">カント <b>32°15′07″</b></span></div>
       <p class="feat">クセは少ないが、直線はやや長め。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-kishiwada">
-      <h3>岸和田競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>56.7m</b></span><span class="chip">カント <b>30°56′00″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-kishiwada">
+      <summary class="vsum"><span class="vname">岸和田競輪場</span><span class="vkeys">400m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>56.7m</b></span><span class="chip">カント <b>30°56′00″</b></span></div>
       <p class="feat">直線は比較的長く、クセの少ないバンク。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-tamano">
-      <h3>玉野競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>47.9m</b></span><span class="chip">カント <b>30°37′33″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-tamano">
+      <summary class="vsum"><span class="vname">玉野競輪場</span><span class="vkeys">400m ・ 22レース ・ 平均 5,749円 ・ 万車券 18.2%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>47.9m</b></span><span class="chip">カント <b>30°37′33″</b></span></div>
       <p class="feat">円に近い形状で、軽くて走りやすいとされるバンク。</p>
       <table class="stats"><tr><th>対象レース</th><td>22レース</td><th>三連単 平均配当</th><td>5,749円</td></tr><tr><th>三連単 中央値</th><td>4,335円</td><th>万車券率</th><td>18.2%</td></tr><tr><th>最高配当</th><td colspan="3">19,650円</td></tr></table>
-    </div><div class="vcard" id="k-hiroshima">
-      <h3>広島競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>57.9m</b></span><span class="chip">カント <b>30°47′34″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-hiroshima">
+      <summary class="vsum"><span class="vname">広島競輪場</span><span class="vkeys">400m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>57.9m</b></span><span class="chip">カント <b>30°47′34″</b></span></div>
       <p class="feat">直線では内側より外側が伸びる傾向が強いとされるバンク。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-hofu">
-      <h3>防府競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>333m</b></span><span class="chip">みなし直線 <b>42.5m</b></span><span class="chip">カント <b>34°41′09″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-hofu">
+      <summary class="vsum"><span class="vname">防府競輪場</span><span class="vkeys">333m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>333m</b></span><span class="chip">みなし直線 <b>42.5m</b></span><span class="chip">カント <b>34°41′09″</b></span></div>
       <p class="feat">直線はやや短いがクセは少ない。カントは34°超と急傾斜。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-takamatsu">
-      <h3>高松競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>54.8m</b></span><span class="chip">カント <b>33°15′50″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-takamatsu">
+      <summary class="vsum"><span class="vname">高松競輪場</span><span class="vkeys">400m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>54.8m</b></span><span class="chip">カント <b>33°15′50″</b></span></div>
       <p class="feat">カントがきつく、コーナーで登る感じが強いバンク（数値は改修前の仕様）。現在は大規模改修中。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-komatsushima">
-      <h3>小松島競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>55.5m</b></span><span class="chip">カント <b>29°46′27″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-komatsushima">
+      <summary class="vsum"><span class="vname">小松島競輪場</span><span class="vkeys">400m ・ 33レース ・ 平均 8,220円 ・ 万車券 20.6%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>55.5m</b></span><span class="chip">カント <b>29°46′27″</b></span></div>
       <p class="feat">カントはやや緩め。海風への注意が必要なバンク。</p>
       <table class="stats"><tr><th>対象レース</th><td>33レース</td><th>三連単 平均配当</th><td>8,220円</td></tr><tr><th>三連単 中央値</th><td>3,690円</td><th>万車券率</th><td>20.6%</td></tr><tr><th>最高配当</th><td colspan="3">62,220円</td></tr></table>
-    </div><div class="vcard" id="k-kochi">
-      <h3>高知競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>500m</b></span><span class="chip">みなし直線 <b>52.0m</b></span><span class="chip">カント <b>24°29′51″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-kochi">
+      <summary class="vsum"><span class="vname">高知競輪場</span><span class="vkeys">500m ・ 27レース ・ 平均 11,622円 ・ 万車券 14.8%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>500m</b></span><span class="chip">みなし直線 <b>52.0m</b></span><span class="chip">カント <b>24°29′51″</b></span></div>
       <p class="feat">500mバンクながらカントは全国最小級。500バンクの中では先行が逃げ残りやすいとされる。</p>
       <table class="stats"><tr><th>対象レース</th><td>27レース</td><th>三連単 平均配当</th><td>11,622円</td></tr><tr><th>三連単 中央値</th><td>2,400円</td><th>万車券率</th><td>14.8%</td></tr><tr><th>最高配当</th><td colspan="3">176,210円</td></tr></table>
-    </div><div class="vcard" id="k-matsuyama">
-      <h3>松山競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>58.6m</b></span><span class="chip">カント <b>34°01′48″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-matsuyama">
+      <summary class="vsum"><span class="vname">松山競輪場</span><span class="vkeys">400m ・ 30レース ・ 平均 13,162円 ・ 万車券 30.0%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>58.6m</b></span><span class="chip">カント <b>34°01′48″</b></span></div>
       <p class="feat">カントの立った高速バンクで、自力型の選手に有利とされる。</p>
       <table class="stats"><tr><th>対象レース</th><td>30レース</td><th>三連単 平均配当</th><td>13,162円</td></tr><tr><th>三連単 中央値</th><td>5,530円</td><th>万車券率</th><td>30.0%</td></tr><tr><th>最高配当</th><td colspan="3">96,650円</td></tr></table>
-    </div><div class="vcard" id="k-kokura">
-      <h3>小倉競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>56.9m</b></span><span class="chip">カント <b>34°01′48″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-kokura">
+      <summary class="vsum"><span class="vname">小倉競輪場</span><span class="vkeys">400m ・ 36レース ・ 平均 12,028円 ・ 万車券 27.8%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>56.9m</b></span><span class="chip">カント <b>34°01′48″</b></span></div>
       <p class="feat">屋内ドーム（北九州メディアドーム）内の400mバンクで、天候の影響を受けない。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>三連単 平均配当</th><td>12,028円</td></tr><tr><th>三連単 中央値</th><td>6,435円</td><th>万車券率</th><td>27.8%</td></tr><tr><th>最高配当</th><td colspan="3">64,410円</td></tr></table>
-    </div><div class="vcard" id="k-kurume">
-      <h3>久留米競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>50.7m</b></span><span class="chip">カント <b>31°28′37″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-kurume">
+      <summary class="vsum"><span class="vname">久留米競輪場</span><span class="vkeys">400m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>50.7m</b></span><span class="chip">カント <b>31°28′37″</b></span></div>
       <p class="feat">クセのない、平均的な400mバンク。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div><div class="vcard" id="k-takeo">
-      <h3>武雄競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>64.4m</b></span><span class="chip">カント <b>32°00′19″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-takeo">
+      <summary class="vsum"><span class="vname">武雄競輪場</span><span class="vkeys">400m ・ 45レース ・ 平均 9,186円 ・ 万車券 25.5%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>64.4m</b></span><span class="chip">カント <b>32°00′19″</b></span></div>
       <p class="feat">みなし直線64.4mは400mバンクで最長。差しや追い込みが届きやすい。</p>
       <table class="stats"><tr><th>対象レース</th><td>45レース</td><th>三連単 平均配当</th><td>9,186円</td></tr><tr><th>三連単 中央値</th><td>3,100円</td><th>万車券率</th><td>25.5%</td></tr><tr><th>最高配当</th><td colspan="3">58,230円</td></tr></table>
-    </div><div class="vcard" id="k-sasebo">
-      <h3>佐世保競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>40.2m</b></span><span class="chip">カント <b>31°28′37″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-sasebo">
+      <summary class="vsum"><span class="vname">佐世保競輪場</span><span class="vkeys">400m ・ 18レース ・ 平均 15,094円 ・ 万車券 33.3%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>40.2m</b></span><span class="chip">カント <b>31°28′37″</b></span></div>
       <p class="feat">直線が短く、先行が若干有利になりやすいバンク。</p>
       <table class="stats"><tr><th>対象レース</th><td>18レース</td><th>三連単 平均配当</th><td>15,094円</td></tr><tr><th>三連単 中央値</th><td>3,695円</td><th>万車券率</th><td>33.3%</td></tr><tr><th>最高配当</th><td colspan="3">99,700円</td></tr></table>
-    </div><div class="vcard" id="k-beppu">
-      <h3>別府競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>59.9m</b></span><span class="chip">カント <b>33°41′24″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-beppu">
+      <summary class="vsum"><span class="vname">別府競輪場</span><span class="vkeys">400m ・ 36レース ・ 平均 14,066円 ・ 万車券 26.3%</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>59.9m</b></span><span class="chip">カント <b>33°41′24″</b></span></div>
       <p class="feat">直線はやや長く、季節を問わず風が吹くため追い込み有利とされる。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>三連単 平均配当</th><td>14,066円</td></tr><tr><th>三連単 中央値</th><td>2,890円</td><th>万車券率</th><td>26.3%</td></tr><tr><th>最高配当</th><td colspan="3">219,380円</td></tr></table>
-    </div><div class="vcard" id="k-kumamoto">
-      <h3>熊本競輪場</h3>
-      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>60.3m</b></span><span class="chip">カント <b>34°15′29″</b></span></div>
+      </div>
+    </details><details class="vcard" id="k-kumamoto">
+      <summary class="vsum"><span class="vname">熊本競輪場</span><span class="vkeys">400m ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>60.3m</b></span><span class="chip">カント <b>34°15′29″</b></span></div>
       <p class="feat">2024年6月に400mバンクへリニューアル。直線は長めで、カントも立っている。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）</p>
-    </div>
+      </div>
+    </details>
     </div>
     <p class="note-small" style="margin-top:12px">バンク仕様の出典：netkeirin「全国バンクデータ」（2025年4月21日更新）およびWikipedia「競輪場」の数値を参照し、数値・事実のみを記載しています。カントはセンター部の最大傾斜です。</p>
   </section>
@@ -324,127 +378,151 @@
   <section>
     <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14.5V5.5"/><path d="M12 5.5l5.5 6H12"/><path d="M4 15.5l1.6 3.5h12.8L20 15.5"/><path d="M2 21.8c2.2 0 2.2 1.4 4.4 1.4S8.6 21.8 10.8 21.8s2.2 1.4 4.4 1.4 2.2-1.4 4.4-1.4"/></svg> ボートレース場 詳細</h2>
     <div class="vgrid">
-      <div class="vcard" id="b-kiryu">
-      <h3>ボートレース桐生</h3>
-      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
+      <details class="vcard" id="b-kiryu">
+      <summary class="vsum"><span class="vname">ボートレース桐生</span><span class="vkeys">淡水 ・ 24レース ・ 1号艇1着 62.5% ・ 平均 4,279円</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
       <p class="feat">標高が高く、冬は赤城おろしの強風が吹く。ナイター開催が中心。</p>
       <table class="stats"><tr><th>対象レース</th><td>24レース</td><th>1号艇 1着率</th><td>62.5%</td></tr><tr><th>1号艇 3着内率</th><td>83.3%</td><th>三連単 平均配当</th><td>4,279円</td></tr><tr><th>三連単 中央値</th><td>1,830円</td><th>最高配当</th><td>18,090円</td></tr></table>
-    </div><div class="vcard" id="b-toda">
-      <h3>ボートレース戸田</h3>
-      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-toda">
+      <summary class="vsum"><span class="vname">ボートレース戸田</span><span class="vkeys">淡水 ・ 36レース ・ 1号艇1着 25.0% ・ 平均 10,036円</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
       <p class="feat">水面幅が全国で最も狭く、まくりが決まりやすい。当サイトの集計でも1号艇の1着率は突出して低く出た。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>1号艇 1着率</th><td>25.0%</td></tr><tr><th>1号艇 3着内率</th><td>55.6%</td><th>三連単 平均配当</th><td>10,036円</td></tr><tr><th>三連単 中央値</th><td>3,225円</td><th>最高配当</th><td>136,940円</td></tr></table>
-    </div><div class="vcard" id="b-edogawa">
-      <h3>ボートレース江戸川</h3>
-      <div class="specs"><span class="chip">水質 <b>汽水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-edogawa">
+      <summary class="vsum"><span class="vname">ボートレース江戸川</span><span class="vkeys">汽水 ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>汽水</b></span></div>
       <p class="feat">全国唯一の河川コース。中川の流れと干満の影響で荒れやすい難水面。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催がありませんでした）</p>
-    </div><div class="vcard" id="b-heiwajima">
-      <h3>ボートレース平和島</h3>
-      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-heiwajima">
+      <summary class="vsum"><span class="vname">ボートレース平和島</span><span class="vkeys">海水 ・ 24レース ・ 1号艇1着 50.0% ・ 平均 8,213円</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
       <p class="feat">横風が強く、1マークでの振り幅が大きい水面。</p>
       <table class="stats"><tr><th>対象レース</th><td>24レース</td><th>1号艇 1着率</th><td>50.0%</td></tr><tr><th>1号艇 3着内率</th><td>87.5%</td><th>三連単 平均配当</th><td>8,213円</td></tr><tr><th>三連単 中央値</th><td>3,495円</td><th>最高配当</th><td>61,650円</td></tr></table>
-    </div><div class="vcard" id="b-tamagawa">
-      <h3>ボートレース多摩川</h3>
-      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-tamagawa">
+      <summary class="vsum"><span class="vname">ボートレース多摩川</span><span class="vkeys">淡水 ・ 36レース ・ 1号艇1着 52.8% ・ 平均 4,766円</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
       <p class="feat">「日本一の静水面」と呼ばれる穏やかな水面で、実力が反映されやすい。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>1号艇 1着率</th><td>52.8%</td></tr><tr><th>1号艇 3着内率</th><td>86.1%</td><th>三連単 平均配当</th><td>4,766円</td></tr><tr><th>三連単 中央値</th><td>2,825円</td><th>最高配当</th><td>33,170円</td></tr></table>
-    </div><div class="vcard" id="b-hamanako">
-      <h3>ボートレース浜名湖</h3>
-      <div class="specs"><span class="chip">水質 <b>汽水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-hamanako">
+      <summary class="vsum"><span class="vname">ボートレース浜名湖</span><span class="vkeys">汽水 ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>汽水</b></span></div>
       <p class="feat">全国屈指の広さの水面。走りやすいが、風の影響は受ける。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催がありませんでした）</p>
-    </div><div class="vcard" id="b-gamagori">
-      <h3>ボートレース蒲郡</h3>
-      <div class="specs"><span class="chip">水質 <b>汽水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-gamagori">
+      <summary class="vsum"><span class="vname">ボートレース蒲郡</span><span class="vkeys">汽水 ・ 36レース ・ 1号艇1着 47.2% ・ 平均 4,847円</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>汽水</b></span></div>
       <p class="feat">囲まれた水面で比較的安定している。ナイター開催。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>1号艇 1着率</th><td>47.2%</td></tr><tr><th>1号艇 3着内率</th><td>75.0%</td><th>三連単 平均配当</th><td>4,847円</td></tr><tr><th>三連単 中央値</th><td>2,150円</td><th>最高配当</th><td>27,670円</td></tr></table>
-    </div><div class="vcard" id="b-tokoname">
-      <h3>ボートレース常滑</h3>
-      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-tokoname">
+      <summary class="vsum"><span class="vname">ボートレース常滑</span><span class="vkeys">海水 ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
       <p class="feat">広めの水面で、伊勢湾からの風が影響する。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催がありませんでした）</p>
-    </div><div class="vcard" id="b-tsu">
-      <h3>ボートレース津</h3>
-      <div class="specs"><span class="chip">水質 <b>汽水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-tsu">
+      <summary class="vsum"><span class="vname">ボートレース津</span><span class="vkeys">汽水 ・ 36レース ・ 1号艇1着 47.2% ・ 平均 9,974円</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>汽水</b></span></div>
       <p class="feat">比較的穏やかな水面で、イン戦が固まりやすい。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>1号艇 1着率</th><td>47.2%</td></tr><tr><th>1号艇 3着内率</th><td>77.8%</td><th>三連単 平均配当</th><td>9,974円</td></tr><tr><th>三連単 中央値</th><td>2,745円</td><th>最高配当</th><td>69,770円</td></tr></table>
-    </div><div class="vcard" id="b-mikuni">
-      <h3>ボートレース三国</h3>
-      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-mikuni">
+      <summary class="vsum"><span class="vname">ボートレース三国</span><span class="vkeys">淡水 ・ 36レース ・ 1号艇1着 44.4% ・ 平均 7,038円</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
       <p class="feat">風の影響を受けやすく、荒れる日がある水面。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>1号艇 1着率</th><td>44.4%</td></tr><tr><th>1号艇 3着内率</th><td>80.6%</td><th>三連単 平均配当</th><td>7,038円</td></tr><tr><th>三連単 中央値</th><td>2,950円</td><th>最高配当</th><td>66,550円</td></tr></table>
-    </div><div class="vcard" id="b-biwako">
-      <h3>ボートレースびわこ</h3>
-      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-biwako">
+      <summary class="vsum"><span class="vname">ボートレースびわこ</span><span class="vkeys">淡水 ・ 12レース ・ 1号艇1着 58.3% ・ 平均 6,110円</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
       <p class="feat">琵琶湖の水面で、波やうねりが出ることもある。</p>
       <table class="stats"><tr><th>対象レース</th><td>12レース</td><th>1号艇 1着率</th><td>58.3%</td></tr><tr><th>1号艇 3着内率</th><td>91.7%</td><th>三連単 平均配当</th><td>6,110円</td></tr><tr><th>三連単 中央値</th><td>2,930円</td><th>最高配当</th><td>27,910円</td></tr></table>
-    </div><div class="vcard" id="b-suminoe">
-      <h3>ボートレース住之江</h3>
-      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-suminoe">
+      <summary class="vsum"><span class="vname">ボートレース住之江</span><span class="vkeys">淡水 ・ 36レース ・ 1号艇1着 66.7% ・ 平均 3,765円</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
       <p class="feat">人工プールの静水面。ナイター開催の中心地。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>1号艇 1着率</th><td>66.7%</td></tr><tr><th>1号艇 3着内率</th><td>77.8%</td><th>三連単 平均配当</th><td>3,765円</td></tr><tr><th>三連単 中央値</th><td>1,465円</td><th>最高配当</th><td>32,440円</td></tr></table>
-    </div><div class="vcard" id="b-amagasaki">
-      <h3>ボートレース尼崎</h3>
-      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-amagasaki">
+      <summary class="vsum"><span class="vname">ボートレース尼崎</span><span class="vkeys">淡水 ・ 36レース ・ 1号艇1着 55.6% ・ 平均 4,581円</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
       <p class="feat">人工プールで水面が非常に安定しており、インが強い。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>1号艇 1着率</th><td>55.6%</td></tr><tr><th>1号艇 3着内率</th><td>88.9%</td><th>三連単 平均配当</th><td>4,581円</td></tr><tr><th>三連単 中央値</th><td>1,795円</td><th>最高配当</th><td>29,040円</td></tr></table>
-    </div><div class="vcard" id="b-naruto">
-      <h3>ボートレース鳴門</h3>
-      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-naruto">
+      <summary class="vsum"><span class="vname">ボートレース鳴門</span><span class="vkeys">海水 ・ 36レース ・ 1号艇1着 47.2% ・ 平均 6,458円</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
       <p class="feat">潮位差が大きく、うねりの出やすい難水面。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>1号艇 1着率</th><td>47.2%</td></tr><tr><th>1号艇 3着内率</th><td>75.0%</td><th>三連単 平均配当</th><td>6,458円</td></tr><tr><th>三連単 中央値</th><td>3,145円</td><th>最高配当</th><td>39,990円</td></tr></table>
-    </div><div class="vcard" id="b-marugame">
-      <h3>ボートレース丸亀</h3>
-      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-marugame">
+      <summary class="vsum"><span class="vname">ボートレース丸亀</span><span class="vkeys">海水 ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
       <p class="feat">追い潮・向かい潮で展開が変わる。ナイター開催。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催がありませんでした）</p>
-    </div><div class="vcard" id="b-kojima">
-      <h3>ボートレース児島</h3>
-      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-kojima">
+      <summary class="vsum"><span class="vname">ボートレース児島</span><span class="vkeys">海水 ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
       <p class="feat">潮の影響があり、風が強まると波立つ水面。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催がありませんでした）</p>
-    </div><div class="vcard" id="b-miyajima">
-      <h3>ボートレース宮島</h3>
-      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-miyajima">
+      <summary class="vsum"><span class="vname">ボートレース宮島</span><span class="vkeys">海水 ・ 24レース ・ 1号艇1着 70.8% ・ 平均 6,694円</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
       <p class="feat">瀬戸内海に面し、干満差の影響が大きい水面。</p>
       <table class="stats"><tr><th>対象レース</th><td>24レース</td><th>1号艇 1着率</th><td>70.8%</td></tr><tr><th>1号艇 3着内率</th><td>91.7%</td><th>三連単 平均配当</th><td>6,694円</td></tr><tr><th>三連単 中央値</th><td>1,220円</td><th>最高配当</th><td>47,350円</td></tr></table>
-    </div><div class="vcard" id="b-tokuyama">
-      <h3>ボートレース徳山</h3>
-      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-tokuyama">
+      <summary class="vsum"><span class="vname">ボートレース徳山</span><span class="vkeys">海水 ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
       <p class="feat">湾内で穏やかな水面。1コースの1着率は全国トップクラスとされる。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催がありませんでした）</p>
-    </div><div class="vcard" id="b-shimonoseki">
-      <h3>ボートレース下関</h3>
-      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-shimonoseki">
+      <summary class="vsum"><span class="vname">ボートレース下関</span><span class="vkeys">海水 ・ 12レース ・ 1号艇1着 75.0% ・ 平均 7,414円</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
       <p class="feat">防波堤に囲まれて穏やかな水面。ナイター開催。</p>
       <table class="stats"><tr><th>対象レース</th><td>12レース</td><th>1号艇 1着率</th><td>75.0%</td></tr><tr><th>1号艇 3着内率</th><td>91.7%</td><th>三連単 平均配当</th><td>7,414円</td></tr><tr><th>三連単 中央値</th><td>1,315円</td><th>最高配当</th><td>68,560円</td></tr></table>
-    </div><div class="vcard" id="b-wakamatsu">
-      <h3>ボートレース若松</h3>
-      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-wakamatsu">
+      <summary class="vsum"><span class="vname">ボートレース若松</span><span class="vkeys">海水 ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
       <p class="feat">静水面と難水面の両面を持つとされる。ナイター開催。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催がありませんでした）</p>
-    </div><div class="vcard" id="b-ashiya">
-      <h3>ボートレース芦屋</h3>
-      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-ashiya">
+      <summary class="vsum"><span class="vname">ボートレース芦屋</span><span class="vkeys">淡水 ・ 36レース ・ 1号艇1着 55.6% ・ 平均 4,840円</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
       <p class="feat">安定した水面でインが強い。企画レースが多い。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>1号艇 1着率</th><td>55.6%</td></tr><tr><th>1号艇 3着内率</th><td>80.6%</td><th>三連単 平均配当</th><td>4,840円</td></tr><tr><th>三連単 中央値</th><td>2,820円</td><th>最高配当</th><td>27,020円</td></tr></table>
-    </div><div class="vcard" id="b-fukuoka">
-      <h3>ボートレース福岡</h3>
-      <div class="specs"><span class="chip">水質 <b>汽水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-fukuoka">
+      <summary class="vsum"><span class="vname">ボートレース福岡</span><span class="vkeys">汽水 ・ 36レース ・ 1号艇1着 77.8% ・ 平均 2,174円</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>汽水</b></span></div>
       <p class="feat">那珂川の河口でうねりが出る水面だが、インの強さでも知られる。当サイトの集計では1号艇の1着率が最も高く出た。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>1号艇 1着率</th><td>77.8%</td></tr><tr><th>1号艇 3着内率</th><td>94.4%</td><th>三連単 平均配当</th><td>2,174円</td></tr><tr><th>三連単 中央値</th><td>1,490円</td><th>最高配当</th><td>13,600円</td></tr></table>
-    </div><div class="vcard" id="b-karatsu">
-      <h3>ボートレース唐津</h3>
-      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-karatsu">
+      <summary class="vsum"><span class="vname">ボートレース唐津</span><span class="vkeys">淡水 ・ データ蓄積中</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>淡水</b></span></div>
       <p class="feat">水面は広めで、風の向きによって難度が変わる。</p>
       <p class="note-small">当サイトの検証データ：データ蓄積中（対象期間内に開催がありませんでした）</p>
-    </div><div class="vcard" id="b-omura">
-      <h3>ボートレース大村</h3>
-      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
+      </div>
+    </details><details class="vcard" id="b-omura">
+      <summary class="vsum"><span class="vname">ボートレース大村</span><span class="vkeys">海水 ・ 36レース ・ 1号艇1着 66.7% ・ 平均 9,053円</span><svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="vbody">      <div class="specs"><span class="chip">水質 <b>海水</b></span></div>
       <p class="feat">大村湾の穏やかな水面。イン有利の代表格とされる。</p>
       <table class="stats"><tr><th>対象レース</th><td>36レース</td><th>1号艇 1着率</th><td>66.7%</td></tr><tr><th>1号艇 3着内率</th><td>80.6%</td><th>三連単 平均配当</th><td>9,053円</td></tr><tr><th>三連単 中央値</th><td>1,865円</td><th>最高配当</th><td>76,650円</td></tr></table>
-    </div>
+      </div>
+    </details>
     </div>
     <p class="note-small" style="margin-top:12px">水質・水面特性は公表されている一般情報をもとに、事実のみを当サイトの言葉で記載しています。</p>
   </section>
@@ -454,5 +532,17 @@
     <a class="back" href="index.html">← トップページに戻る</a>
   </footer>
 </div>
+
+<script>
+(function(){
+  function openFromHash(){
+    if(!location.hash) return;
+    var el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(el && el.tagName === 'DETAILS'){ el.open = true; }
+  }
+  window.addEventListener('hashchange', openFromHash);
+  openFromHash();
+})();
+</script>
 </body>
 </html>
