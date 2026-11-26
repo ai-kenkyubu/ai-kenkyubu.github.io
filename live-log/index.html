@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101014">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>ライブ記録</title>
+<style>
+  :root{
+    --bg:#101014;
+    --surface:#1b1b22;
+    --surface2:#24242e;
+    --line:#33333f;
+    --text:#f2f2f5;
+    --muted:#a7a7b3;
+    --accent:#ffc233;
+    --accent-text:#1a1405;
+    --danger:#ff5a6a;
+    --radius:14px;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  header{
+    position:sticky; top:0; z-index:20;
+    background:rgba(16,16,20,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    padding:12px 16px 10px;
+  }
+  header h1{
+    margin:0; font-size:20px; letter-spacing:.06em;
+    display:flex; align-items:center; gap:8px;
+  }
+  header h1 .dot{width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 10px var(--accent); flex:none;}
+  header .sub{color:var(--muted); font-size:12px; margin-top:2px;}
+  main{max-width:720px; margin:0 auto; padding:14px 14px 40px;}
+  /* buttons */
+  button{
+    font:inherit; color:var(--text);
+    background:var(--surface2);
+    border:1px solid var(--line);
+    border-radius:10px;
+    min-height:44px; padding:8px 14px;
+    cursor:pointer;
+  }
+  button:active{opacity:.75;}
+  .btn-primary{background:var(--accent); color:var(--accent-text); border-color:var(--accent); font-weight:700;}
+  .btn-danger{background:transparent; color:var(--danger); border-color:var(--danger);}
+  .btn-small{min-height:38px; padding:4px 10px; font-size:14px; border-radius:8px;}
+  .btn-block{width:100%;}
+  /* toolbar */
+  .toolbar{display:flex; gap:8px; margin-bottom:12px;}
+  .toolbar .grow{flex:1;}
+  input[type="search"], input[type="text"], input[type="date"], input[type="number"], textarea, select{
+    font:inherit; font-size:16px;
+    width:100%;
+    background:var(--surface);
+    color:var(--text);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:11px 12px;
+    min-height:44px;
+  }
+  textarea{min-height:88px; resize:vertical;}
+  input:focus, textarea:focus{outline:2px solid var(--accent); outline-offset:0; border-color:var(--accent);}
+  .backup-row{display:flex; gap:8px; margin-bottom:14px;}
+  .backup-row button{flex:1; font-size:14px;}
+  /* cards */
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:14px 16px;
+    margin-bottom:10px;
+    cursor:pointer;
+  }
+  .card:active{background:var(--surface2);}
+  .card .date{color:var(--accent); font-size:13px; font-weight:700; letter-spacing:.04em;}
+  .card .title{font-size:18px; font-weight:700; margin:2px 0;}
+  .card .meta{color:var(--muted); font-size:14px;}
+  .empty{
+    text-align:center; color:var(--muted);
+    padding:48px 20px;
+    border:1px dashed var(--line);
+    border-radius:var(--radius);
+  }
+  .empty .big{font-size:17px; color:var(--text); margin-bottom:6px;}
+  /* form */
+  .view{display:none;}
+  .view.active{display:block;}
+  .field{margin-bottom:14px;}
+  .field label{display:block; font-size:13px; color:var(--muted); margin-bottom:5px; font-weight:600; letter-spacing:.03em;}
+  .field .hint{font-size:12px; color:var(--muted); margin-top:4px;}
+  fieldset{
+    border:1px solid var(--line); border-radius:var(--radius);
+    padding:12px 14px 4px; margin:0 0 16px;
+  }
+  legend{font-size:13px; color:var(--accent); font-weight:700; padding:0 6px; letter-spacing:.05em;}
+  .form-head{display:flex; align-items:center; gap:8px; margin-bottom:14px;}
+  .form-head h2{margin:0; font-size:18px; flex:1;}
+  /* setlist */
+  .sl-row{
+    display:flex; align-items:center; gap:6px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:6px 8px;
+    margin-bottom:6px;
+  }
+  .sl-row .num{color:var(--muted); font-size:13px; width:26px; text-align:right; flex:none;}
+  .sl-row input{flex:1; min-height:40px; padding:8px 10px; background:var(--surface2);}
+  .sl-row .mv{display:flex; flex-direction:column; gap:4px; flex:none;}
+  .sl-row .mv button{min-height:26px; padding:0 8px; font-size:12px; line-height:1; border-radius:6px;}
+  .sl-row .del{flex:none; min-height:38px; padding:4px 10px; color:var(--danger);}
+  .sl-encore{
+    display:flex; align-items:center; gap:6px;
+    margin-bottom:6px;
+    color:var(--accent);
+  }
+  .sl-encore .bar{flex:1; display:flex; align-items:center; gap:8px; font-size:13px; font-weight:700; letter-spacing:.08em;}
+  .sl-encore .bar::before, .sl-encore .bar::after{content:""; flex:1; border-top:1px dashed var(--accent); opacity:.6;}
+  .sl-encore button{min-height:32px; padding:2px 9px; font-size:12px;}
+  .sl-add{display:flex; gap:8px; margin:8px 0 4px;}
+  .sl-add button{flex:1; font-size:14px;}
+  .map-btn{margin-top:8px; width:100%;}
+  .footer-actions{display:flex; flex-direction:column; gap:10px; margin-top:20px;}
+  .hidden{display:none !important;}
+</style>
+</head>
+<body>
+<header>
+  <h1><span class="dot"></span>ライブ記録</h1>
+  <div class="sub">行ったライブの記録を、このブラウザの中に残すノート</div>
+</header>
+<main>
+  <!-- ===== 一覧ビュー ===== -->
+  <section id="view-list" class="view active">
+    <div class="toolbar">
+      <input type="search" id="search" class="grow" placeholder="アーティスト・会場・ライブ名で検索" autocomplete="off">
+    </div>
+    <div class="toolbar">
+      <button id="btn-add" class="btn-primary grow">＋ ライブを追加</button>
+    </div>
+    <div class="backup-row">
+      <button id="btn-export">バックアップ書き出し</button>
+      <button id="btn-import">バックアップ読み込み</button>
+      <input type="file" id="file-import" accept="application/json,.json" class="hidden">
+    </div>
+    <div id="list"></div>
+    <div id="empty" class="empty hidden">
+      <div class="big">まだ記録がありません</div>
+      <div>「＋ ライブを追加」から、行ったライブを記録してみましょう。</div>
+    </div>
+    <div id="no-result" class="empty hidden">
+      <div class="big">見つかりませんでした</div>
+      <div>検索条件に合う記録がありません。</div>
+    </div>
+  </section>
+
+  <!-- ===== 編集ビュー ===== -->
+  <section id="view-edit" class="view">
+    <div class="form-head">
+      <button id="btn-back" class="btn-small">← 戻る</button>
+      <h2 id="edit-heading">ライブを追加</h2>
+    </div>
+
+    <div class="field">
+      <label for="f-date">日付</label>
+      <input type="date" id="f-date">
+    </div>
+    <div class="field">
+      <label for="f-title">ライブ名（ツアー名など）</label>
+      <input type="text" id="f-title" placeholder="例：○○ TOUR 2026">
+    </div>
+    <div class="field">
+      <label for="f-artist">アーティスト名</label>
+      <input type="text" id="f-artist" placeholder="例：○○">
+    </div>
+
+    <fieldset>
+      <legend>会場</legend>
+      <div class="field">
+        <label for="f-venue">会場名</label>
+        <input type="text" id="f-venue" placeholder="例：○○ホール">
+      </div>
+      <div class="field">
+        <label for="f-address">場所（住所）</label>
+        <input type="text" id="f-address" placeholder="例：東京都○○区○○ 1-2-3">
+        <button type="button" id="btn-map" class="map-btn">地図で開く（Googleマップ）</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>座席</legend>
+      <div class="field">
+        <label for="f-seat-no">座席番号</label>
+        <input type="text" id="f-seat-no" placeholder="例：アリーナ A3ブロック 12列 34番">
+      </div>
+      <div class="field">
+        <label for="f-seat-area">エリア・階</label>
+        <input type="text" id="f-seat-area" placeholder="例：1階 スタンディング／2階 指定席">
+      </div>
+      <div class="field">
+        <label for="f-seat-view">ステージの見え方メモ</label>
+        <textarea id="f-seat-view" placeholder="例：ステージ右寄り。花道が近くて表情まで見えた。"></textarea>
+      </div>
+      <div class="field">
+        <label for="f-seat-map">座席表メモ</label>
+        <textarea id="f-seat-map" placeholder="例：会場の座席表では B ブロック後方。入口は東ゲートが近い。"></textarea>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>セットリスト</legend>
+      <div id="setlist"></div>
+      <div class="sl-add">
+        <button type="button" id="btn-add-song">＋ 曲を追加</button>
+        <button type="button" id="btn-add-encore">＋ アンコール区切り</button>
+      </div>
+      <div class="hint" style="font-size:12px;color:var(--muted);">曲は1曲ずつ追加できます。↑↓で順番の入れ替え、「アンコール」を区切りとして挟めます。</div>
+    </fieldset>
+
+    <div class="field">
+      <label for="f-price">チケット代（任意）</label>
+      <input type="number" id="f-price" inputmode="numeric" min="0" placeholder="例：8800">
+    </div>
+    <div class="field">
+      <label for="f-memo">感想メモ</label>
+      <textarea id="f-memo" placeholder="当日の感想、印象に残ったMCや演出など"></textarea>
+    </div>
+
+    <div class="footer-actions">
+      <button id="btn-save" class="btn-primary btn-block">保存する</button>
+      <button id="btn-delete" class="btn-danger btn-block hidden">この記録を削除</button>
+    </div>
+  </section>
+</main>
+<script>
+(function(){
+  "use strict";
+  var KEY = "livelog.v1";
+
+  /* ---------- 保存・読み込み ---------- */
+  function load(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(!raw) return [];
+      var data = JSON.parse(raw);
+      return Array.isArray(data) ? data : [];
+    }catch(e){
+      return [];
+    }
+  }
+  function save(){
+    try{
+      localStorage.setItem(KEY, JSON.stringify(shows));
+    }catch(e){
+      alert("保存できませんでした。ブラウザの容量がいっぱいの可能性があります。");
+    }
+  }
+
+  var shows = load();
+  var editingId = null;   // null = 新規追加
+  var draft = null;       // 編集中の公演（セットリスト含む作業コピー）
+
+  /* ---------- ユーティリティ ---------- */
+  function $(id){ return document.getElementById(id); }
+  function esc(s){
+    return String(s == null ? "" : s)
+      .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+  }
+  function uid(){
+    return "s" + Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+  }
+  function fmtDate(d){
+    if(!d) return "日付未設定";
+    var p = d.split("-");
+    if(p.length !== 3) return d;
+    return p[0] + "年" + Number(p[1]) + "月" + Number(p[2]) + "日";
+  }
+  function emptyShow(){
+    return {
+      id: uid(), date: "", title: "", artist: "",
+      venue: "", address: "",
+      seatNo: "", seatArea: "", seatView: "", seatMapMemo: "",
+      setlist: [], memo: "", ticketPrice: ""
+    };
+  }
+  function clone(o){ return JSON.parse(JSON.stringify(o)); }
+
+  /* ---------- ビュー切り替え ---------- */
+  function showView(name){
+    $("view-list").classList.toggle("active", name === "list");
+    $("view-edit").classList.toggle("active", name === "edit");
+    window.scrollTo(0,0);
+  }
+
+  /* ---------- 一覧描画 ---------- */
+  function renderList(){
+    var q = $("search").value.trim().toLowerCase();
+    var sorted = shows.slice().sort(function(a,b){
+      var da = a.date || "", db = b.date || "";
+      if(da === db) return 0;
+      if(!da) return 1;
+      if(!db) return -1;
+      return da < db ? 1 : -1;   // 新しい順
+    });
+    var filtered = sorted.filter(function(s){
+      if(!q) return true;
+      var hay = [s.title, s.artist, s.venue].join(" ").toLowerCase();
+      return hay.indexOf(q) !== -1;
+    });
+
+    var html = "";
+    filtered.forEach(function(s){
+      var meta = [];
+      if(s.artist) meta.push(esc(s.artist));
+      if(s.venue) meta.push(esc(s.venue));
+      html += '<article class="card" data-id="' + esc(s.id) + '">'
+        + '<div class="date">' + esc(fmtDate(s.date)) + '</div>'
+        + '<div class="title">' + esc(s.title || "（ライブ名未設定）") + '</div>'
+        + (meta.length ? '<div class="meta">' + meta.join(" ・ ") + '</div>' : '')
+        + '</article>';
+    });
+    $("list").innerHTML = html;
+    $("empty").classList.toggle("hidden", !(shows.length === 0 && !q));
+    $("no-result").classList.toggle("hidden", !(shows.length > 0 && filtered.length === 0));
+
+    var cards = $("list").querySelectorAll(".card");
+    for(var i = 0; i < cards.length; i++){
+      cards[i].addEventListener("click", function(){
+        openEdit(this.getAttribute("data-id"));
+      });
+    }
+  }
+
+  /* ---------- 編集フォーム ---------- */
+  function setVal(id, v){ $(id).value = v == null ? "" : v; }
+  function getVal(id){ return $(id).value.trim(); }
+
+  function openEdit(id){
+    if(id){
+      var found = null;
+      for(var i = 0; i < shows.length; i++){ if(shows[i].id === id){ found = shows[i]; break; } }
+      if(!found) return;
+      draft = clone(found);
+      editingId = id;
+      $("edit-heading").textContent = "記録を編集";
+      $("btn-delete").classList.remove("hidden");
+    }else{
+      draft = emptyShow();
+      editingId = null;
+      $("edit-heading").textContent = "ライブを追加";
+      $("btn-delete").classList.add("hidden");
+    }
+    setVal("f-date", draft.date);
+    setVal("f-title", draft.title);
+    setVal("f-artist", draft.artist);
+    setVal("f-venue", draft.venue);
+    setVal("f-address", draft.address);
+    setVal("f-seat-no", draft.seatNo);
+    setVal("f-seat-area", draft.seatArea);
+    setVal("f-seat-view", draft.seatView);
+    setVal("f-seat-map", draft.seatMapMemo);
+    setVal("f-price", draft.ticketPrice);
+    setVal("f-memo", draft.memo);
+    renderSetlist();
+    showView("edit");
+  }
+
+  function gatherForm(){
+    draft.date = getVal("f-date");
+    draft.title = getVal("f-title");
+    draft.artist = getVal("f-artist");
+    draft.venue = getVal("f-venue");
+    draft.address = getVal("f-address");
+    draft.seatNo = getVal("f-seat-no");
+    draft.seatArea = getVal("f-seat-area");
+    draft.seatView = getVal("f-seat-view");
+    draft.seatMapMemo = getVal("f-seat-map");
+    draft.ticketPrice = getVal("f-price");
+    draft.memo = getVal("f-memo");
+    // セットリストの曲名は入力欄から同期
+    var inputs = $("setlist").querySelectorAll("input[data-song]");
+    for(var i = 0; i < inputs.length; i++){
+      var idx = Number(inputs[i].getAttribute("data-song"));
+      if(draft.setlist[idx] && draft.setlist[idx].type === "song"){
+        draft.setlist[idx].name = inputs[i].value;
+      }
+    }
+    // 空の曲行は保存時に取り除く
+    draft.setlist = draft.setlist.filter(function(item){
+      return item.type === "encore" || (item.name && item.name.trim() !== "");
+    });
+    draft.setlist.forEach(function(item){
+      if(item.type === "song") item.name = item.name.trim();
+    });
+  }
+
+  /* ---------- セットリストエディタ ---------- */
+  function syncSongInputs(){
+    var inputs = $("setlist").querySelectorAll("input[data-song]");
+    for(var i = 0; i < inputs.length; i++){
+      var idx = Number(inputs[i].getAttribute("data-song"));
+      if(draft.setlist[idx] && draft.setlist[idx].type === "song"){
+        draft.setlist[idx].name = inputs[i].value;
+      }
+    }
+  }
+
+  function renderSetlist(){
+    var wrap = $("setlist");
+    if(draft.setlist.length === 0){
+      wrap.innerHTML = '<div style="color:var(--muted);font-size:14px;padding:6px 0 2px;">曲がまだありません。「＋ 曲を追加」から入力してください。</div>';
+      return;
+    }
+    var html = "";
+    var songNo = 0;
+    draft.setlist.forEach(function(item, idx){
+      if(item.type === "encore"){
+        html += '<div class="sl-encore">'
+          + '<div class="bar">アンコール</div>'
+          + '<button type="button" data-act="up" data-idx="' + idx + '">↑</button>'
+          + '<button type="button" data-act="down" data-idx="' + idx + '">↓</button>'
+          + '<button type="button" data-act="del" data-idx="' + idx + '">削除</button>'
+          + '</div>';
+      }else{
+        songNo++;
+        html += '<div class="sl-row">'
+          + '<div class="num">' + songNo + '.</div>'
+          + '<input type="text" data-song="' + idx + '" value="' + esc(item.name) + '" placeholder="曲名" autocomplete="off">'
+          + '<div class="mv">'
+          + '<button type="button" data-act="up" data-idx="' + idx + '">↑</button>'
+          + '<button type="button" data-act="down" data-idx="' + idx + '">↓</button>'
+          + '</div>'
+          + '<button type="button" class="del" data-act="del" data-idx="' + idx + '">削除</button>'
+          + '</div>';
+      }
+    });
+    wrap.innerHTML = html;
+
+    var btns = wrap.querySelectorAll("button[data-act]");
+    for(var i = 0; i < btns.length; i++){
+      btns[i].addEventListener("click", function(){
+        var act = this.getAttribute("data-act");
+        var idx = Number(this.getAttribute("data-idx"));
+        syncSongInputs();
+        if(act === "del"){
+          draft.setlist.splice(idx, 1);
+        }else if(act === "up" && idx > 0){
+          var t1 = draft.setlist[idx-1]; draft.setlist[idx-1] = draft.setlist[idx]; draft.setlist[idx] = t1;
+        }else if(act === "down" && idx < draft.setlist.length - 1){
+          var t2 = draft.setlist[idx+1]; draft.setlist[idx+1] = draft.setlist[idx]; draft.setlist[idx] = t2;
+        }
+        renderSetlist();
+      });
+    }
+  }
+
+  /* ---------- イベント ---------- */
+  $("btn-add").addEventListener("click", function(){ openEdit(null); });
+  $("btn-back").addEventListener("click", function(){ showView("list"); });
+  $("search").addEventListener("input", renderList);
+
+  $("btn-add-song").addEventListener("click", function(){
+    syncSongInputs();
+    draft.setlist.push({type:"song", name:""});
+    renderSetlist();
+    var inputs = $("setlist").querySelectorAll("input[data-song]");
+    if(inputs.length) inputs[inputs.length - 1].focus();
+  });
+  $("btn-add-encore").addEventListener("click", function(){
+    syncSongInputs();
+    draft.setlist.push({type:"encore"});
+    renderSetlist();
+  });
+
+  $("btn-map").addEventListener("click", function(){
+    var q = [getVal("f-venue"), getVal("f-address")].filter(Boolean).join(" ");
+    if(!q){ alert("会場名か住所を入力してください。"); return; }
+    var url = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+    window.open(url, "_blank");
+  });
+
+  $("btn-save").addEventListener("click", function(){
+    gatherForm();
+    if(!draft.title && !draft.artist){
+      alert("ライブ名かアーティスト名のどちらかは入力してください。");
+      return;
+    }
+    if(editingId){
+      for(var i = 0; i < shows.length; i++){
+        if(shows[i].id === editingId){ shows[i] = draft; break; }
+      }
+    }else{
+      shows.push(draft);
+    }
+    save();
+    draft = null; editingId = null;
+    renderList();
+    showView("list");
+  });
+
+  $("btn-delete").addEventListener("click", function(){
+    if(!editingId) return;
+    if(!confirm("この記録を削除しますか？元に戻せません。")) return;
+    shows = shows.filter(function(s){ return s.id !== editingId; });
+    save();
+    draft = null; editingId = null;
+    renderList();
+    showView("list");
+  });
+
+  /* ---------- バックアップ ---------- */
+  $("btn-export").addEventListener("click", function(){
+    var payload = { app: "livelog", version: 1, exportedAt: new Date().toISOString(), shows: shows };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], {type: "application/json"});
+    var url = URL.createObjectURL(blob);
+    var now = new Date();
+    var ymd = now.getFullYear() + ("0" + (now.getMonth() + 1)).slice(-2) + ("0" + now.getDate()).slice(-2);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "livelog-backup-" + ymd + ".json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  });
+
+  $("btn-import").addEventListener("click", function(){ $("file-import").click(); });
+  $("file-import").addEventListener("change", function(){
+    var file = this.files && this.files[0];
+    this.value = "";
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(){
+      try{
+        var data = JSON.parse(String(reader.result));
+        var arr = Array.isArray(data) ? data : data.shows;
+        if(!Array.isArray(arr)) throw new Error("bad format");
+        var cleaned = arr.filter(function(s){ return s && typeof s === "object"; }).map(function(s){
+          var base = emptyShow();
+          for(var k in base){ if(s[k] !== undefined) base[k] = s[k]; }
+          if(!base.id) base.id = uid();
+          if(!Array.isArray(base.setlist)) base.setlist = [];
+          base.setlist = base.setlist.filter(function(it){
+            return it && (it.type === "encore" || it.type === "song");
+          });
+          return base;
+        });
+        if(!confirm("現在の記録 " + shows.length + " 件を、読み込んだ " + cleaned.length + " 件で置き換えますか？")) return;
+        shows = cleaned;
+        save();
+        renderList();
+        alert("読み込みが完了しました（" + cleaned.length + " 件）。");
+      }catch(e){
+        alert("読み込めませんでした。バックアップファイル（JSON）を選んでください。");
+      }
+    };
+    reader.readAsText(file);
+  });
+
+  /* ---------- 初期表示 ---------- */
+  renderList();
+})();
+</script>
+</body>
+</html>
