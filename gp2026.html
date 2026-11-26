@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KEIRINグランプリ2026特集｜AI研究部 予想検証ラボ</title>
+<meta name="description" content="2026年12月30日・いわき平競輪場で開催されるKEIRINグランプリ2026の特集ページ。出場決定9選手（GI優勝枠5名・賞金上位枠4名）と補欠、会場データ、AI研究部の検証予告を掲載。レース後は結果もこのページに反映します。">
+<meta property="og:title" content="KEIRINグランプリ2026特集｜AI研究部 予想検証ラボ">
+<meta property="og:description" content="12月30日・いわき平競輪場。出場決定9選手と会場データ、AI研究部の検証予告を掲載。レース後は結果も反映します。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ai-kenkyubu.github.io/gp2026.html">
+<meta property="og:image" content="https://ai-kenkyubu.github.io/banner.webp">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  :root{
+    --bg:#070b1a; --panel:#0e1530; --panel2:#111a3d;
+    --cyan:#22d3ee; --violet:#a78bfa; --green:#34d399;
+    --text:#e8ecf8; --muted:#9aa7c7; --line:#23305e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;line-height:1.7}
+  a{color:var(--cyan)}
+  .wrap{max-width:960px;margin:0 auto;padding:0 16px 64px}
+  section{margin-top:40px}
+  h2{font-size:1.25rem;border-left:4px solid var(--cyan);padding-left:10px;margin-bottom:14px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
+  table{width:100%;border-collapse:collapse;font-size:.95rem}
+  th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  .score{font-weight:700;color:var(--green);white-space:nowrap}
+  .note-small{color:var(--muted);font-size:.85rem}
+  .badge{display:inline-block;background:var(--panel2);border:1px solid var(--violet);color:var(--violet);border-radius:999px;padding:0 10px;font-size:.75rem;margin-left:8px}
+  footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;text-align:center}
+  .back{margin-top:20px;display:inline-block}
+  @media (max-width:640px){ table{font-size:.85rem} th,td{padding:6px} }
+.ic{width:1.05em;height:1.05em;vertical-align:-.17em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* === GP2026 feature hero === */
+.gp-hero{margin-top:22px;text-align:center;border-radius:18px;padding:40px 20px 34px;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse 90% 120% at 50% -20%,rgba(167,139,250,.35),transparent 60%),radial-gradient(ellipse 70% 100% at 85% 110%,rgba(52,211,153,.22),transparent 60%),radial-gradient(ellipse 70% 100% at 15% 110%,rgba(34,211,238,.22),transparent 60%),var(--panel);
+  border:2px solid var(--cyan);box-shadow:0 0 34px rgba(34,211,238,.28),inset 0 0 44px rgba(167,139,250,.10)}
+.gp-hero::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--green))}
+.gp-kicker{display:inline-block;font-weight:800;letter-spacing:.28em;font-size:.8rem;color:var(--bg);background:linear-gradient(90deg,var(--cyan),var(--green));border-radius:999px;padding:3px 16px 3px 19px}
+.gp-hero h1{font-size:2.6rem;line-height:1.25;letter-spacing:.04em;margin-top:16px;font-weight:900}
+.gp-hero h1 .grad{background:linear-gradient(90deg,var(--cyan),var(--violet),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+.gp-meta{margin-top:10px;font-size:1.12rem;font-weight:700}
+.gp-meta .venue{color:var(--cyan)}
+.gp-count{margin-top:20px;color:var(--muted);font-size:1rem;letter-spacing:.12em}
+.gp-count .num{display:block;font-size:3.6rem;line-height:1.1;font-weight:900;letter-spacing:0;background:linear-gradient(90deg,var(--cyan),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+.gp-count .unit{font-size:1.3rem;font-weight:800;color:var(--text)}
+.specs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chip{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:2px 12px;font-size:.85rem}
+.chip b{color:var(--green)}
+.gplinks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.gplink{display:block;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;color:var(--text);text-decoration:none;transition:transform .2s ease,border-color .2s ease}
+.gplink:hover{transform:translateY(-3px);border-color:var(--cyan)}
+.gplink b{display:block;font-size:1rem;margin-bottom:4px}
+.gplink span{color:var(--muted);font-size:.85rem}
+.gplink .arrow{color:var(--cyan);font-weight:700}
+
+/* responsive polish 2026-11-24 */
+img{max-width:100%}
+html,body{overflow-x:clip}
+@media(max-width:640px){
+h1{font-size:1.4rem}
+.gp-hero{padding:30px 14px 26px}
+.gp-hero h1{font-size:1.9rem}
+.gp-count .num{font-size:2.7rem}
+h2{font-size:1.15rem}
+table{font-size:13px}
+}
+</style>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0b0f1a">
+<link rel="apple-touch-icon" href="/icon-192.png">
+</head>
+<body>
+<a href="/portal/" style="display:block;text-align:center;padding:12px 10px;background:linear-gradient(92deg,#0e4d7a,#3b2a7a);color:#fff;font-weight:900;font-size:16px;text-decoration:none;letter-spacing:.05em;position:relative;z-index:99"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></svg> AI研究部ポータル TOPへ →</a>
+<div class="wrap">
+
+  <div class="gp-hero">
+    <span class="gp-kicker">SPECIAL FEATURE</span>
+    <h1>KEIRINグランプリ2026 <span class="grad">特集</span></h1>
+    <p class="gp-meta">2026年12月30日（水）開催 ／ <span class="venue">いわき平競輪場</span></p>
+    <p class="gp-count" id="gp-count-wrap">開催まで あと<span class="num"><span id="gp-count">34</span><span class="unit"> 日</span></span></p>
+    <p class="note-small" style="margin-top:14px">その年のGI優勝者と賞金上位者が集う、競輪の頂点を決める一戦。出場9選手と会場データをまとめました。</p>
+  </div>
+  <a class="back" href="index.html">← トップページに戻る</a>
+
+  <section>
+    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M8.8 13.6L7 21l5-2.6L17 21l-1.8-7.4"/></svg> 出場決定選手（9名＋補欠）</h2>
+    <div class="panel">
+      <p>出場枠は9名。<strong>2026年11月23日にJKAが発表し、全9名が確定しました。</strong>GI優勝による出場が5名、選考用賞金上位による出場が4名です。この9名が2027年のS級S班となります。</p>
+      <p class="note-small" style="margin-top:8px">GI優勝による出場（5名）</p>
+      <table style="margin-top:8px">
+        <tr><th>氏名</th><th>期別</th><th>級班</th><th>所属</th><th>選出根拠・出場回数</th><th>競走得点</th></tr>
+        <tr><td>脇本雄太</td><td>94期</td><td>S級S班</td><td>福井</td><td>GI優勝：全日本選抜（熊本）／5年連続8回目</td><td class="score">113.90</td></tr>
+        <tr><td>古性優作</td><td>100期</td><td>S級S班</td><td>大阪</td><td>GI優勝：日本選手権・高松宮記念杯の2勝／6年連続6回目</td><td class="score">119.48</td></tr>
+        <tr><td>犬伏湧也</td><td>119期</td><td>S級1班</td><td>徳島</td><td>GI優勝：オールスター／初出場</td><td class="score">120.38</td></tr>
+        <tr><td>石原颯</td><td>117期</td><td>S級1班</td><td>香川</td><td>GI優勝：寛仁親王牌／初出場</td><td class="score">117.17</td></tr>
+        <tr><td>山口拳矢</td><td>117期</td><td>S級1班</td><td>岐阜</td><td>GI優勝：競輪祭（小倉）／3年ぶり2回目</td><td class="score">116.11</td></tr>
+      </table>
+      <p class="note-small" style="margin-top:12px">選考用賞金上位による出場（4名）</p>
+      <table style="margin-top:8px">
+        <tr><th>氏名</th><th>期別</th><th>級班</th><th>所属</th><th>出場回数</th><th>競走得点</th></tr>
+        <tr><td>吉田拓矢</td><td>107期</td><td>S級S班</td><td>茨城</td><td>2年連続3回目</td><td class="score">120.28</td></tr>
+        <tr><td>眞杉匠</td><td>113期</td><td>S級S班</td><td>栃木</td><td>4年連続4回目</td><td class="score">117.41</td></tr>
+        <tr><td>松浦悠士</td><td>98期</td><td>S級1班</td><td>広島</td><td>3年ぶり6回目</td><td class="score">116.44</td></tr>
+        <tr><td>深谷知広</td><td>96期</td><td>S級1班</td><td>静岡</td><td>3年ぶり7回目</td><td class="score">117.25</td></tr>
+      </table>
+      <p class="note-small" style="margin-top:12px">補欠：佐々木悠葵（115期・S級1班・群馬、競走得点115.83）。級班は現在のもの。競走得点は2026年11月25日時点。出典：netkeirin（JKA発表・2026/11/23）、keirin-mobile 平均競走得点ランキング（2026/11/25取得）。各選手の詳しいデータは<a href="riders.html">競輪 選手データ</a>に掲載しています。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg> 会場：いわき平競輪場</h2>
+    <div class="panel">
+      <div class="specs"><span class="chip">周長 <b>400m</b></span><span class="chip">みなし直線 <b>62.7m</b></span><span class="chip">カント <b>32°54′54″</b></span></div>
+      <p>構造物の上に設けられた「空中バンク」として知られる競輪場です。直線が長く、差しが決まりやすいバンクとされています。</p>
+      <p class="note-small" style="margin-top:8px">当サイトの検証データ：データ蓄積中（対象期間内に開催実績が集まっていません）。グランプリ当日の検証結果は、このページの結果セクションに反映します。各地のバンク特性は<a href="venues.html#k-iwakitaira">競輪場・競艇場データ</a>にまとめています。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 3h5"/><path d="M10.5 3v5.2L5.2 18a2.3 2.3 0 0 0 2 3.5h9.6a2.3 2.3 0 0 0 2-3.5L13.5 8.2V3"/><path d="M7.6 14.5h8.8"/></svg> AI研究部の検証について</h2>
+    <div class="panel">
+      <p>AI研究部では、KEIRINグランプリ2026も通常の開催と同じ進め方で検証します。レース前にAI予想を公開し、レース後に実際の結果と照らし合わせて、的中・不的中をそのまま記録します。予想と検証結果はこのページと、トップページの競輪ダッシュボードに反映します。</p>
+      <p class="note-small" style="margin-top:8px">毎日の予想と検証の記録は、トップページと note「競輪の検証記録」でも公開しています。</p>
+    </div>
+  </section>
+
+  <section id="result">
+    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21.5v-19"/><path d="M5 4.5c4-2.2 7 1.8 14 0v8.5c-7 1.8-10-2.2-14 0"/></svg> 結果</h2>
+    <div class="panel">
+      <p>結果はレース後（2026年12月30日）に掲載します。AI予想と実際の着順、検証結果をこのセクションに追加します。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7.4.4l3-3a5 5 0 0 0-7-7l-1.8 1.8"/><path d="M14 10a5 5 0 0 0-7.4-.4l-3 3a5 5 0 0 0 7 7l1.8-1.8"/></svg> 関連ページ</h2>
+    <div class="gplinks">
+      <a class="gplink" href="riders.html"><b>競輪 選手データ <span class="arrow">›</span></b><span>GP出場選手の詳細、競走得点トップ10、注目選手の選出理由を掲載。毎週水曜更新。</span></a>
+      <a class="gplink" href="venues.html"><b>競輪場・競艇場データ <span class="arrow">›</span></b><span>全国の競輪場・競艇場のバンク特性と、当サイトの検証データをまとめています。</span></a>
+      <a class="gplink" href="index.html#dashboard"><b>トップページ・競輪ダッシュボード <span class="arrow">›</span></b><span>AI予想の検証成績（的中率・回収率）の累計と、日別のグラフはこちら。</span></a>
+    </div>
+  </section>
+
+  <footer>
+    AI研究部｜AI予想の全レース検証データを毎日公開しています<br>
+    運営：AI研究部（AIを使用して運営しています）<br>
+    <a href="index.html">トップページ</a> ／ <a href="https://note.com/calm_dbai">note</a> ／ <a href="https://x.com/nukodbai">X</a>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var target = new Date('2026-12-30T00:00:00+09:00');
+  var days = Math.ceil((target - new Date()) / 86400000);
+  var wrap = document.getElementById('gp-count-wrap');
+  var num = document.getElementById('gp-count');
+  if(!wrap || !num) return;
+  if(days > 0){ num.textContent = days; }
+  else if(days === 0){ wrap.textContent = '本日開催'; }
+  else { wrap.textContent = '開催は終了しました（結果は下記セクションに掲載）'; }
+})();
+</script>
+<script data-goatcounter="https://ai-kenkyubu.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
