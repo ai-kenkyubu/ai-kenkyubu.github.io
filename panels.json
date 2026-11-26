@@ -1,45 +1,29 @@
 {
+ "updated": "2026-11-27",
+ "stats": {
+  "hpVisitors": 27,
+  "noteViews": 121,
+  "followers": 5,
+  "date": "2026-11-26"
+ },
  "results": {
-  "boat": {
-   "cumulative": {
-    "exactaHits": 278,
-    "races": 746,
-    "returnRate": 73.4,
-    "simPnl": -193260,
-    "totalRaces": 746,
-    "trifectaHits": 152
-   },
-   "exactaHits": 56,
-   "races": 156,
-   "returnRate": 64.3,
-   "returnRateDiff": -44.8,
-   "simPnl": -55330,
-   "trend": [
-    81.1,
-    60.9,
-    52.8,
-    109.1,
-    64.3
-   ],
-   "trifectaHits": 19
-  },
-  "date": "2026-11-25",
+  "date": "2026-11-26",
   "keirin": {
+   "races": 84,
+   "trifectaHits": 19,
+   "exactaHits": 35,
+   "returnRate": 70.5,
+   "simPnl": -23560,
+   "returnRateDiff": 9.7,
    "cumulative": {
-    "exactaHits": 574,
-    "races": 1403,
-    "returnRate": 68.3,
-    "simPnl": -378580,
-    "totalRaces": 1403,
-    "trifectaHits": 333
+    "races": 1487,
+    "trifectaHits": 352,
+    "exactaHits": 609,
+    "returnRate": 68.5,
+    "simPnl": -402140,
+    "totalRaces": 1487
    },
-   "exactaHits": 36,
-   "races": 75,
-   "returnRate": 60.8,
-   "returnRateDiff": -22.8,
-   "simPnl": -28920,
    "trend": [
-    56.8,
     62.3,
     61.1,
     77.5,
@@ -52,16 +36,33 @@
     49.0,
     59.4,
     83.6,
-    60.8
-   ],
-   "trifectaHits": 16
+    60.8,
+    70.5
+   ]
+  },
+  "boat": {
+   "races": 144,
+   "trifectaHits": 29,
+   "exactaHits": 44,
+   "returnRate": 126.9,
+   "simPnl": 38540,
+   "returnRateDiff": 62.6,
+   "cumulative": {
+    "races": 890,
+    "trifectaHits": 181,
+    "exactaHits": 322,
+    "returnRate": 82.2,
+    "simPnl": -154720,
+    "totalRaces": 890
+   },
+   "trend": [
+    81.1,
+    60.9,
+    52.8,
+    109.1,
+    64.3,
+    126.9
+   ]
   }
- },
- "stats": {
-  "date": "2026-11-25",
-  "followers": 6,
-  "hpVisitors": 8,
-  "noteViews": 381
- },
- "updated": "2026-11-26T12:48:16+09:00"
+ }
 }
