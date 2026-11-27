@@ -1,0 +1,202 @@
+{
+ "keirin": [
+  {
+   "date": "20261107",
+   "tri_hits": 10,
+   "tri_n": 63,
+   "sim_pct": null,
+   "tri_pct": 15.9
+  },
+  {
+   "date": "20261108",
+   "tri_hits": 14,
+   "tri_n": 83,
+   "sim_pct": null,
+   "tri_pct": 16.9
+  },
+  {
+   "date": "20261109",
+   "tri_hits": 21,
+   "tri_n": 83,
+   "sim_pct": 81.6,
+   "tri_pct": 25.3
+  },
+  {
+   "date": "20261110",
+   "tri_hits": 21,
+   "tri_n": 78,
+   "sim_pct": 53.7,
+   "tri_pct": 26.9
+  },
+  {
+   "date": "20261111",
+   "tri_hits": 32,
+   "tri_n": 84,
+   "sim_pct": 88.1,
+   "tri_pct": 38.1
+  },
+  {
+   "date": "20261112",
+   "tri_hits": 12,
+   "tri_n": 83,
+   "sim_pct": 56.8,
+   "tri_pct": 14.5
+  },
+  {
+   "date": "20261113",
+   "tri_hits": 15,
+   "tri_n": 72,
+   "sim_pct": 62.3,
+   "tri_pct": 20.8
+  },
+  {
+   "date": "20261114",
+   "tri_hits": 23,
+   "tri_n": 67,
+   "sim_pct": 61.1,
+   "tri_pct": 34.3
+  },
+  {
+   "date": "20261115",
+   "tri_hits": 20,
+   "tri_n": 80,
+   "sim_pct": 77.5,
+   "tri_pct": 25.0
+  },
+  {
+   "date": "20261116",
+   "tri_hits": 19,
+   "tri_n": 72,
+   "sim_pct": 73.1,
+   "tri_pct": 26.4
+  },
+  {
+   "date": "20261117",
+   "tri_hits": 20,
+   "tri_n": 71,
+   "sim_pct": 76.5,
+   "tri_pct": 28.2
+  },
+  {
+   "date": "20261118",
+   "tri_hits": 22,
+   "tri_n": 79,
+   "sim_pct": 112.6,
+   "tri_pct": 27.8
+  },
+  {
+   "date": "20261119",
+   "tri_hits": 16,
+   "tri_n": 75,
+   "sim_pct": 64.3,
+   "tri_pct": 21.3
+  },
+  {
+   "date": "20261120",
+   "tri_hits": 8,
+   "tri_n": 57,
+   "sim_pct": 25.1,
+   "tri_pct": 14.0
+  },
+  {
+   "date": "20261121",
+   "tri_hits": 13,
+   "tri_n": 55,
+   "sim_pct": 55.0,
+   "tri_pct": 23.6
+  },
+  {
+   "date": "20261122",
+   "tri_hits": 12,
+   "tri_n": 68,
+   "sim_pct": 49.0,
+   "tri_pct": 17.6
+  },
+  {
+   "date": "20261123",
+   "tri_hits": 24,
+   "tri_n": 78,
+   "sim_pct": 59.4,
+   "tri_pct": 30.8
+  },
+  {
+   "date": "20261124",
+   "tri_hits": 15,
+   "tri_n": 80,
+   "sim_pct": 83.6,
+   "tri_pct": 18.8
+  },
+  {
+   "date": "20261125",
+   "tri_hits": 16,
+   "tri_n": 75,
+   "sim_pct": 60.8,
+   "tri_pct": 21.3
+  },
+  {
+   "date": "20261126",
+   "tri_hits": 19,
+   "tri_n": 84,
+   "sim_pct": 70.5,
+   "tri_pct": 22.6
+  },
+  {
+   "date": "20261127",
+   "tri_hits": 24,
+   "tri_n": 79,
+   "sim_pct": 73.2,
+   "tri_pct": 30.4
+  }
+ ],
+ "boatrace": [
+  {
+   "date": "20261121",
+   "tri_hits": 25,
+   "tri_n": 99,
+   "sim_pct": 81.1,
+   "tri_pct": 25.3
+  },
+  {
+   "date": "20261122",
+   "tri_hits": 43,
+   "tri_n": 168,
+   "sim_pct": 60.9,
+   "tri_pct": 25.6
+  },
+  {
+   "date": "20261123",
+   "tri_hits": 32,
+   "tri_n": 156,
+   "sim_pct": 52.8,
+   "tri_pct": 20.5
+  },
+  {
+   "date": "20261124",
+   "tri_hits": 33,
+   "tri_n": 167,
+   "sim_pct": 109.1,
+   "tri_pct": 19.8
+  },
+  {
+   "date": "20261125",
+   "tri_hits": 19,
+   "tri_n": 156,
+   "sim_pct": 64.3,
+   "tri_pct": 12.2
+  },
+  {
+   "date": "20261126",
+   "tri_hits": 29,
+   "tri_n": 144,
+   "sim_pct": 126.9,
+   "tri_pct": 20.1
+  },
+  {
+   "date": "20261127",
+   "tri_hits": 31,
+   "tri_n": 168,
+   "sim_pct": 56.3,
+   "tri_pct": 18.5
+  }
+ ]
+}
