@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#14161a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f4f4f0" media="(prefers-color-scheme: light)" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="ダーツRt" />
+    <meta name="description" content="01とクリケットの出目をタップ入力して蓄積し、PHOENIX基準とDARTSLIVE基準のレーティングを算出するダーツ練習用Webアプリ。" />
+    <link rel="icon" href="data:," />
+    <title>ダーツレーティング公開版</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet" />
+    <style>
+      button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2.25rem; }
+      :root{
+        --bg:#f4f4f0; --surface:#ffffff; --surface2:#eceee8; --ink:#17181c; --ink2:#555a52;
+        --line:#d8dbd2; --red:#d92b2b; --red-ink:#b91f1f; --green:#177a46; --board:#1c1e22;
+        --board-ink:#f5f2e9; --phoenix:#d92b2b; --dl:#0b6bcb;
+        --shadow:0 1px 3px rgba(20,22,26,.10), 0 8px 24px rgba(20,22,26,.06);
+      }
+      @media (prefers-color-scheme: dark){
+        :root{
+          --bg:#101215; --surface:#1a1d21; --surface2:#23262c; --ink:#f0efe9; --ink2:#a7aba0;
+          --line:#33373e; --red:#ff4d42; --red-ink:#ff7a70; --green:#3ecf7e; --board:#26292f;
+          --board-ink:#f5f2e9; --phoenix:#ff5a4d; --dl:#4da3ff;
+          --shadow:0 1px 3px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+        }
+      }
+      *{box-sizing:border-box;}
+      html{-webkit-text-size-adjust:100%;}
+      body{margin:0;background:var(--bg);color:var(--ink);
+        font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;
+        line-height:1.55; padding-bottom:env(safe-area-inset-bottom);}
+      .num{font-family:"Archivo","Zen Kaku Gothic New",sans-serif; font-variant-numeric:tabular-nums;}
+      .wrap{max-width:640px;margin:0 auto;padding:14px 14px 40px;}
+      @media(min-width:900px){.wrap{max-width:880px;}}
+      h1{font-size:1.35rem;font-weight:900;margin:2px 0 2px;letter-spacing:.02em;}
+      .lead{color:var(--ink2);font-size:.85rem;margin:0 0 14px;}
+      h2{font-size:1rem;font-weight:900;margin:0 0 10px;display:flex;align-items:center;gap:8px;}
+      h2 .bar{width:5px;height:1.05em;background:var(--red);border-radius:2px;display:inline-block;}
+      section{margin-bottom:22px;}
+      /* summary */
+      .rangeseg{margin-bottom:10px;}
+      .summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+      @media(max-width:380px){.summary{grid-template-columns:1fr;}}
+      .sumcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow);}
+      .sumcard .sys{font-size:.72rem;font-weight:900;letter-spacing:.14em;}
+      .sumcard.phx .sys{color:var(--phoenix);} .sumcard.dl .sys{color:var(--dl);}
+      .sumcard .rt{font-size:2.1rem;font-weight:900;line-height:1.1;}
+      .sumcard .rt small{font-size:.85rem;color:var(--ink2);font-weight:700;}
+      .sumcard .rt.none{font-size:1.25rem;color:var(--ink2);padding:6px 0 2px;}
+      .sumcard .flight{display:inline-block;font-weight:900;font-size:.8rem;padding:1px 9px;border-radius:999px;background:var(--surface2);margin-top:2px;}
+      .sumcard .detail{font-size:.74rem;color:var(--ink2);margin-top:6px;line-height:1.55;}
+      .sumnote{font-size:.72rem;color:var(--ink2);margin-top:8px;line-height:1.6;}
+      /* setup */
+      .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow);}
+      .seg{display:flex;background:var(--surface2);border-radius:11px;padding:4px;gap:4px;}
+      .seg button{flex:1;border:0;background:transparent;color:var(--ink2);font:inherit;font-weight:900;font-size:.92rem;border-radius:8px;padding:9px 4px;cursor:pointer;min-height:44px;}
+      .seg button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.18);}
+      .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+      .chips button{flex:1;min-width:64px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:900;font-size:1.05rem;border-radius:10px;padding:10px 4px;cursor:pointer;min-height:48px;}
+      .chips button.on{border-color:var(--red);color:var(--red-ink);background:color-mix(in srgb, var(--red) 8%, var(--surface));}
+      .startbtn{width:100%;margin-top:14px;border:0;background:var(--red);color:#fff;font:inherit;font-weight:900;font-size:1.05rem;border-radius:11px;padding:13px;cursor:pointer;min-height:52px;}
+      .startbtn:active{transform:scale(.99);}
+      /* board */
+      .board{background:var(--board);color:var(--board-ink);border-radius:16px;padding:16px 14px;box-shadow:var(--shadow);}
+      .board .topline{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;}
+      .board .gametype{font-size:.75rem;font-weight:900;letter-spacing:.12em;opacity:.75;}
+      .board .round{font-size:.85rem;font-weight:700;opacity:.9;}
+      .remain{text-align:center;padding:6px 0 2px;}
+      .remain .big{font-size:4rem;font-weight:900;line-height:1;}
+      .remain .lbl{font-size:.75rem;letter-spacing:.2em;opacity:.7;font-weight:700;}
+      .board .sub{display:flex;justify-content:center;gap:18px;font-size:.85rem;font-weight:700;flex-wrap:wrap;}
+      .board .sub b{font-size:1.05rem;}
+      .darts{display:flex;gap:8px;justify-content:center;margin-top:12px;}
+      .dart{flex:1;max-width:110px;text-align:center;border:1.5px dashed rgba(245,242,233,.35);border-radius:10px;padding:7px 2px;font-weight:900;font-size:.95rem;min-height:42px;display:flex;align-items:center;justify-content:center;}
+      .dart.filled{border-style:solid;border-color:rgba(245,242,233,.85);background:rgba(255,255,255,.07);}
+      .dart.bust{border-color:#ff6b61;color:#ff9d95;}
+      .checkout{margin-top:10px;text-align:center;font-size:.85rem;font-weight:700;color:#ffd34d;min-height:1.4em;}
+      /* cricket board */
+      .ckgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:10px;}
+      @media(max-width:380px){.ckgrid{grid-template-columns:repeat(4,1fr);}}
+      .ckcell{text-align:center;background:rgba(255,255,255,.06);border-radius:9px;padding:7px 1px;}
+      .ckcell .n{font-weight:900;font-size:.95rem;}
+      .ckcell .m{font-size:.8rem;font-weight:700;letter-spacing:1px;line-height:1.25;min-height:1.25em;}
+      .ckcell.open{background:var(--green);color:#fff;}
+      /* input pad */
+      .mult{display:flex;gap:8px;margin:14px 0 10px;}
+      .mult button{flex:1;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:900;border-radius:10px;padding:10px 4px;cursor:pointer;font-size:.95rem;min-height:48px;}
+      .mult button.on[data-m="1"]{border-color:var(--ink);background:var(--ink);color:var(--bg);}
+      .mult button.on[data-m="2"]{border-color:var(--dl);background:var(--dl);color:#fff;}
+      .mult button.on[data-m="3"]{border-color:var(--red);background:var(--red);color:#fff;}
+      .pad{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+      .pad button{border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:800;font-size:1.15rem;border-radius:11px;padding:12px 2px;cursor:pointer;min-height:54px;box-shadow:0 1px 2px rgba(0,0,0,.05);}
+      .pad button:active{background:var(--surface2);transform:scale(.97);}
+      .pad button.bull{background:var(--board);color:var(--board-ink);border-color:var(--board);font-size:.95rem;}
+      .pad button.miss{background:var(--surface2);color:var(--ink2);font-size:.9rem;}
+      .actions{display:flex;gap:8px;margin-top:12px;}
+      .actions button{flex:1;border-radius:11px;font:inherit;font-weight:900;padding:12px 6px;cursor:pointer;min-height:50px;font-size:.95rem;}
+      .btn-undo{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);}
+      .btn-end{border:0;background:var(--green);color:#fff;}
+      .btn-quit{border:1.5px solid var(--line);background:transparent;color:var(--ink2);flex:0 0 92px !important;}
+      /* result */
+      .result{border:2px solid var(--green);border-radius:14px;padding:14px;background:var(--surface);box-shadow:var(--shadow);}
+      .result h2 .bar{background:var(--green);}
+      .resgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px;}
+      @media(max-width:380px){.resgrid{grid-template-columns:1fr;}}
+      .resbox{background:var(--surface2);border-radius:11px;padding:10px 12px;}
+      .resbox .sys{font-size:.72rem;font-weight:900;letter-spacing:.12em;}
+      .resbox.phx .sys{color:var(--phoenix);} .resbox.dl .sys{color:var(--dl);}
+      .resbox .rt{font-size:1.55rem;font-weight:900;line-height:1.15;}
+      .resbox .st{font-size:.78rem;color:var(--ink2);}
+      .resstats{display:flex;gap:8px 16px;flex-wrap:wrap;font-size:.88rem;font-weight:700;margin:4px 0 10px;}
+      /* history */
+      .hist{display:flex;flex-direction:column;gap:8px;}
+      .hitem{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;gap:10px;align-items:center;box-shadow:var(--shadow);}
+      .hitem .main{flex:1;min-width:0;}
+      .hitem .t1{font-weight:900;font-size:.92rem;}
+      .hitem .t2{font-size:.76rem;color:var(--ink2);line-height:1.5;}
+      .hitem .rts{text-align:right;font-size:.8rem;font-weight:800;line-height:1.5;white-space:nowrap;}
+      .hitem .rts .p{color:var(--phoenix);} .hitem .rts .d{color:var(--dl);}
+      .del{border:1px solid var(--line);background:transparent;color:var(--ink2);border-radius:8px;font:inherit;font-size:.75rem;font-weight:700;padding:6px 9px;cursor:pointer;min-height:36px;flex:none;}
+      .empty{color:var(--ink2);font-size:.85rem;text-align:center;padding:16px 0;}
+      .clearall{margin-top:10px;width:100%;border:1px solid var(--line);background:transparent;color:var(--ink2);border-radius:10px;font:inherit;font-weight:700;padding:9px;cursor:pointer;}
+      .note{font-size:.74rem;color:var(--ink2);line-height:1.7;}
+      .note p{margin:0 0 6px;}
+      [hidden]{display:none !important;}
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>ダーツレーティング</h1>
+      <p class="lead">01とスタンダードクリケットを1投ずつタップ入力。PHOENIX基準とDARTSLIVE基準、両方のレーティングを出します。</p>
+
+      <section aria-label="現在のレーティング">
+        <h2><span class="bar"></span>レーティング（目安）</h2>
+        <div class="seg rangeseg" id="rangeSeg" role="group" aria-label="集計範囲">
+          <button type="button" data-range="today">今日</button>
+          <button type="button" data-range="last30" class="on">直近30ゲーム</button>
+          <button type="button" data-range="all">全履歴</button>
+        </div>
+        <div class="summary">
+          <div class="sumcard phx">
+            <div class="sys">PHOENIX</div>
+            <div class="rt num" id="sumPhxRt">—</div>
+            <span class="flight" id="sumPhxClass" hidden></span>
+            <div class="detail" id="sumPhxDetail">記録なし</div>
+          </div>
+          <div class="sumcard dl">
+            <div class="sys">DARTSLIVE</div>
+            <div class="rt num" id="sumDlRt">—</div>
+            <span class="flight" id="sumDlFlight" hidden></span>
+            <div class="detail" id="sumDlDetail">記録なし</div>
+          </div>
+        </div>
+        <p class="sumnote">「今日」はその日のゲームだけの平均スタッツから算出（DARTSLIVEの1DAYレーティングに相当する見せ方）。01とクリケットは分けて集計し、両方の記録がある範囲では総合（目安）＝両換算レーティングの平均を表示します。</p>
+      </section>
+
+      <section id="setupSec" aria-label="ゲーム設定">
+        <h2><span class="bar"></span>ゲームを始める</h2>
+        <div class="card">
+          <div class="seg" role="group" aria-label="ゲーム種別">
+            <button type="button" id="tab01" class="on">01</button>
+            <button type="button" id="tabCk">クリケット</button>
+          </div>
+          <div class="chips num" id="scoreChips" role="group" aria-label="開始点数">
+            <button type="button" data-score="301">301</button>
+            <button type="button" data-score="501" class="on">501</button>
+            <button type="button" data-score="701">701</button>
+            <button type="button" data-score="901">901</button>
+          </div>
+          <p class="note" id="ckNote" hidden style="margin-top:12px;">スタンダードクリケット（20 / 19 / 18 / 17 / 16 / 15 / BULL）。1人練習用で、点数計算は行わずマーク数でスタッツを出します。</p>
+          <button type="button" class="startbtn" id="startBtn">ゲーム開始</button>
+        </div>
+      </section>
+
+      <section id="gameSec" hidden aria-label="ゲーム進行">
+        <div class="board">
+          <div class="topline">
+            <span class="gametype" id="gType">01 ・ 501</span>
+            <span class="round num" id="gRound">ROUND 1</span>
+          </div>
+          <div id="board01">
+            <div class="remain">
+              <div class="lbl">REMAINING</div>
+              <div class="big num" id="gRemain">501</div>
+            </div>
+            <div class="sub">
+              <span>このラウンド <b class="num" id="gRoundScore">0</b>点</span>
+              <span>投数 <b class="num" id="gDarts">0</b></span>
+              <span>PPD <b class="num" id="gAvg">—</b></span>
+            </div>
+          </div>
+          <div id="boardCk" hidden>
+            <div class="ckgrid" id="ckGrid"></div>
+            <div class="sub" style="margin-top:10px;">
+              <span>総マーク <b class="num" id="gMarks">0</b></span>
+              <span>投数 <b class="num" id="gCkDarts">0</b></span>
+              <span>MPR <b class="num" id="gMpr">—</b></span>
+            </div>
+          </div>
+          <div class="darts" id="dartSlots">
+            <div class="dart num">—</div>
+            <div class="dart num">—</div>
+            <div class="dart num">—</div>
+          </div>
+          <div class="checkout" id="gMsg"></div>
+        </div>
+
+        <div class="mult" role="group" aria-label="倍率">
+          <button type="button" data-m="1" class="on">シングル</button>
+          <button type="button" data-m="2">ダブル</button>
+          <button type="button" data-m="3">トリプル</button>
+        </div>
+        <div class="pad num" id="pad"></div>
+        <div class="actions">
+          <button type="button" class="btn-quit" id="quitBtn">中止</button>
+          <button type="button" class="btn-undo" id="undoBtn">↩ 1投戻す</button>
+          <button type="button" class="btn-end" id="endBtn" hidden>ゲーム終了</button>
+        </div>
+      </section>
+
+      <section id="resultSec" hidden aria-label="ゲーム結果">
+        <div class="result">
+          <h2><span class="bar"></span><span id="resTitle">ゲーム結果</span></h2>
+          <div class="resstats num" id="resStats"></div>
+          <div class="resgrid">
+            <div class="resbox phx">
+              <div class="sys">PHOENIX</div>
+              <div class="rt num" id="resPhxRt">—</div>
+              <div class="st num" id="resPhxSt"></div>
+            </div>
+            <div class="resbox dl">
+              <div class="sys">DARTSLIVE</div>
+              <div class="rt num" id="resDlRt">—</div>
+              <div class="st num" id="resDlSt"></div>
+            </div>
+          </div>
+          <button type="button" class="startbtn" id="againBtn" style="background:var(--green);">次のゲームへ</button>
+        </div>
+      </section>
+
+      <section aria-label="履歴">
+        <h2><span class="bar"></span>履歴</h2>
+        <div class="hist" id="histList"></div>
+        <p class="empty" id="histEmpty">終了したゲームがここに残ります。</p>
+        <button type="button" class="clearall" id="clearBtn" hidden>履歴をすべて削除</button>
+      </section>
+
+      <section class="note" aria-label="注記">
+        <p>総合レーティングは目安です。01とクリケットのスタッツをどう合成して最終レーティングにするかの計算式は両社とも公開していないため、このアプリでは「01の換算レーティングとクリケットの換算レーティングの平均」で表示しています。</p>
+        <p>スタッツの定義：PHOENIXは100%スタッツ（01はPPD＝1ダーツ平均、最後まで変動）。DARTSLIVEは80%スタッツ（01はPPR＝1ラウンド平均で、累計得点が開始点数の80%に到達した時点で確定。クリケットは全ナンバーがオープンしたラウンドまでで確定）。</p>
+        <p>換算表の出典：DARTSLIVE公式ガイド／PHOENIX公式ガイドのレーティング換算表。</p>
+        <p>記録はこの端末のブラウザ内にのみ保存されます（localStorage）。ブラウザのデータを消去すると履歴も消えます。ホーム画面に追加するとアプリのように起動できます。</p>
+      </section>
+    </div>
+
+    <script>
+    (function(){
+      "use strict";
+      var LS_KEY = "dartsrating.v1";
+
+      /* ---------- conversion tables ---------- */
+      var DL = [
+        [1,0,0,"C"],[2,40,1.30,"C"],[3,45,1.50,"C"],[4,50,1.70,"CC"],[5,55,1.90,"CC"],
+        [6,60,2.10,"B"],[7,65,2.30,"B"],[8,70,2.50,"BB"],[9,75,2.70,"BB"],[10,80,2.90,"A"],
+        [11,85,3.10,"A"],[12,90,3.30,"A"],[13,95,3.50,"AA"],[14,102,3.75,"AA"],[15,109,4.00,"AA"],
+        [16,116,4.25,"SA"],[17,123,4.50,"SA"],[18,130,4.75,"SA"]
+      ];
+      var PHX = [
+        [30,"GRAND MASTER",48.00,6.00],[29,"GRAND MASTER",46.60,5.74],[28,"GRAND MASTER",45.20,5.48],
+        [27,"MASTER",43.80,5.22],[26,"MASTER",42.40,4.96],[25,"MASTER",41.00,4.70],
+        [24,"AAA",39.60,4.49],[23,"AAA",38.20,4.28],[22,"AAA",36.80,4.07],[21,"AAA",35.40,3.86],
+        [20,"AA",34.05,3.71],[19,"AA",32.70,3.56],[18,"AA",31.35,3.41],[17,"AA",30.00,3.26],
+        [16,"A",28.65,3.11],[15,"A",27.30,2.96],[14,"A",25.95,2.81],
+        [13,"BBB",24.65,2.66],[12,"BBB",23.35,2.51],
+        [11,"BB",22.05,2.36],[10,"BB",20.75,2.21],
+        [9,"B",19.45,2.06],[8,"B",18.15,1.91],
+        [7,"CCC",16.90,1.76],[6,"CCC",15.65,1.61],
+        [5,"CC",14.40,1.46],[4,"CC",13.15,1.31],
+        [3,"C",11.90,1.20],[2,"C",10.65,1.10],
+        [1,"N",0,0]
+      ];
+      function dlFromPPR(ppr){ var r=DL[0]; for(var i=0;i<DL.length;i++){ if(ppr>=DL[i][1]) r=DL[i]; } return {rt:r[0], flight:r[3]}; }
+      function dlFromMPR(mpr){ var r=DL[0]; for(var i=0;i<DL.length;i++){ if(mpr>=DL[i][2]) r=DL[i]; } return {rt:r[0], flight:r[3]}; }
+      function phxFromPPD(ppd){ for(var i=0;i<PHX.length;i++){ if(ppd>=PHX[i][2]) return {rt:PHX[i][0], cls:PHX[i][1]}; } return {rt:1, cls:"N"}; }
+      function phxFromMPR(mpr){ for(var i=0;i<PHX.length;i++){ if(mpr>=PHX[i][3]) return {rt:PHX[i][0], cls:PHX[i][1]}; } return {rt:1, cls:"N"}; }
+      function phxClassForRt(rt){ var r=Math.round(rt); for(var i=0;i<PHX.length;i++){ if(PHX[i][0]===r) return PHX[i][1]; } return null; }
+      function dlFlightForRt(rt){ var r=Math.round(rt); for(var i=0;i<DL.length;i++){ if(DL[i][0]===r) return DL[i][3]; } return null; }
+      function fmt(n){ return (n===null||n===undefined||isNaN(n)) ? "—" : Number(n).toFixed(2); }
+      function round2(n){ return Math.round(n*100)/100; }
+      function avg(arr){ if(!arr.length) return null; var s=0; for(var i=0;i<arr.length;i++) s+=arr[i]; return s/arr.length; }
+
+      /* ---------- storage ---------- */
+      function loadHist(){
+        try{ var raw=localStorage.getItem(LS_KEY); if(!raw) return []; var a=JSON.parse(raw); return Array.isArray(a)?a:[]; }
+        catch(e){ return []; }
+      }
+      function saveHist(h){ try{ localStorage.setItem(LS_KEY, JSON.stringify(h)); }catch(e){} }
+      var history = loadHist();
+
+      function $(id){ return document.getElementById(id); }
+      var tab01=$("tab01"), tabCk=$("tabCk"), scoreChips=$("scoreChips"), ckNote=$("ckNote"),
+          setupSec=$("setupSec"), gameSec=$("gameSec"), resultSec=$("resultSec"), pad=$("pad");
+
+      /* ---------- setup ---------- */
+      var mode="01", startScore=501, mult=1, range="last30";
+      tab01.addEventListener("click", function(){ setMode("01"); });
+      tabCk.addEventListener("click", function(){ setMode("cricket"); });
+      function setMode(m){
+        mode=m;
+        tab01.classList.toggle("on", m==="01");
+        tabCk.classList.toggle("on", m==="cricket");
+        scoreChips.hidden = (m!=="01");
+        ckNote.hidden = (m!=="cricket");
+      }
+      scoreChips.addEventListener("click", function(e){
+        var b=e.target.closest("button[data-score]"); if(!b) return;
+        startScore=parseInt(b.getAttribute("data-score"),10);
+        var bs=scoreChips.querySelectorAll("button");
+        for(var i=0;i<bs.length;i++) bs[i].classList.toggle("on", bs[i]===b);
+      });
+      document.querySelector(".mult").addEventListener("click", function(e){
+        var b=e.target.closest("button[data-m]"); if(!b) return;
+        setMult(parseInt(b.getAttribute("data-m"),10));
+      });
+      function setMult(m){
+        mult=m;
+        var bs=document.querySelectorAll(".mult button");
+        for(var i=0;i<bs.length;i++) bs[i].classList.toggle("on", parseInt(bs[i].getAttribute("data-m"),10)===m);
+      }
+      $("rangeSeg").addEventListener("click", function(e){
+        var b=e.target.closest("button[data-range]"); if(!b) return;
+        range=b.getAttribute("data-range");
+        var bs=$("rangeSeg").querySelectorAll("button");
+        for(var i=0;i<bs.length;i++) bs[i].classList.toggle("on", bs[i]===b);
+        renderSummary();
+      });
+
+      /* ---------- pad ---------- */
+      var CK_NUMBERS=[20,19,18,17,16,15,25];
+      function buildPad(){
+        pad.innerHTML="";
+        if(mode==="01"){
+          for(var n=1;n<=20;n++) pad.appendChild(padBtn(String(n), "num", n));
+          pad.appendChild(padBtn("BULL","bull",25));
+          pad.appendChild(padBtn("MISS","miss",0));
+        } else {
+          CK_NUMBERS.forEach(function(n){ pad.appendChild(padBtn(n===25?"BULL":String(n), n===25?"bull":"num", n)); });
+          pad.appendChild(padBtn("MISS","miss",0));
+        }
+      }
+      function padBtn(label, cls, val){
+        var b=document.createElement("button");
+        b.type="button"; b.textContent=label; b.className=cls;
+        b.addEventListener("click", function(){ onThrow(val); });
+        return b;
+      }
+
+      /* ---------- game state (throws are the single source of truth) ---------- */
+      var game=null;
+
+      $("startBtn").addEventListener("click", function(){
+        setMult(1);
+        game = (mode==="01")
+          ? { type:"01", start:startScore, throws:[] }   // throw: {label, score, round}
+          : { type:"cricket", throws:[] };               // throw: {label, num, marks}
+        buildPad();
+        setupSec.hidden=true; resultSec.hidden=true; gameSec.hidden=false;
+        $("endBtn").hidden = (mode!=="cricket");
+        renderGame();
+        gameSec.scrollIntoView({behavior:"smooth", block:"start"});
+      });
+      $("quitBtn").addEventListener("click", function(){
+        game=null; gameSec.hidden=true; setupSec.hidden=false; resultSec.hidden=true;
+      });
+      $("againBtn").addEventListener("click", function(){
+        resultSec.hidden=true; setupSec.hidden=false;
+        setupSec.scrollIntoView({behavior:"smooth", block:"start"});
+      });
+      $("undoBtn").addEventListener("click", function(){
+        if(!game || !game.throws.length) return;
+        game.throws.pop();
+        renderGame();
+      });
+      $("endBtn").addEventListener("click", function(){
+        if(game && game.type==="cricket") finishCk();
+      });
+
+      function onThrow(val){
+        if(!game) return;
+        if(game.type==="01"){
+          var a=analyze01(game);
+          if(a.finished) return;
+          var label, score;
+          if(val===0){ label="MISS"; score=0; }
+          else if(val===25){ var m=Math.min(mult,2); score=(m===2)?50:25; label=(m===2)?"D-BULL":"S-BULL"; }
+          else { score=val*mult; label=(mult===1?"S":mult===2?"D":"T")+val; }
+          game.throws.push({label:label, score:score, round:a.nextRound});
+          var a2=analyze01(game);
+          renderGame();
+          if(a2.finished) finish01(a2);
+        } else {
+          var marks, label2;
+          if(val===0){ label2="MISS"; marks=0; }
+          else if(val===25){ marks=Math.min(mult,2); label2=(marks===2?"D":"S")+"-BULL"; }
+          else { marks=mult; label2=(mult===1?"S":mult===2?"D":"T")+val; }
+          game.throws.push({label:label2, num:val, marks:marks});
+          renderGame();
+        }
+      }
+
+      /* ----- 01 analysis: replay throws round by round ----- */
+      function analyze01(g){
+        var byRound={}, order=[];
+        g.throws.forEach(function(t){
+          if(!byRound[t.round]){ byRound[t.round]=[]; order.push(t.round); }
+          byRound[t.round].push(t);
+        });
+        var remain=g.start, total=0, bust={}, dl=null, threshold=g.start*0.8;
+        order.forEach(function(r){
+          var rs=remain, pts=0, busted=false, dlCand=null;
+          byRound[r].forEach(function(t){
+            if(busted) return;
+            var nr=remain-t.score;
+            if(nr<0 || nr===1){ busted=true; return; }
+            remain=nr; pts+=t.score;
+            if(!dl && !dlCand && (total+pts) >= threshold-1e-9) dlCand={score:total+pts, rounds:r};
+          });
+          if(busted){ remain=rs; bust[r]=true; }
+          else { total+=pts; if(!dl && dlCand) dl=dlCand; }
+        });
+        var lastRound = order.length? order[order.length-1] : 0;
+        var lastThrows = lastRound? byRound[lastRound] : [];
+        var lastBust = lastRound? !!bust[lastRound] : false;
+        var closed = lastRound>0 && (lastBust || lastThrows.length>=3);
+        var nextRound = lastRound===0 ? 1 : (closed ? lastRound+1 : lastRound);
+        var dispThrows, dispRound, dispBust=false;
+        if(lastBust){ dispThrows=lastThrows; dispRound=lastRound; dispBust=true; }
+        else if(closed){ dispThrows=[]; dispRound=nextRound; }
+        else { dispThrows=lastThrows; dispRound=Math.max(1,lastRound); }
+        var dispScore=0; if(!dispBust) dispThrows.forEach(function(t){ dispScore+=t.score; });
+        return { remain:remain, total:total, bust:bust, dl:dl, finished:(remain===0 && g.throws.length>0),
+                 lastRound:lastRound, nextRound:nextRound, dispThrows:dispThrows, dispRound:dispRound,
+                 dispBust:dispBust, dispScore:dispScore };
+      }
+
+      /* ----- cricket analysis ----- */
+      function analyzeCk(g){
+        var marks={}; CK_NUMBERS.forEach(function(n){ marks[n]=0; });
+        var openRound=null, effList=[];
+        g.throws.forEach(function(t, idx){
+          var eff=0;
+          if(t.num!==0){ eff=Math.max(0, Math.min(t.marks, 3-marks[t.num])); marks[t.num]+=eff; }
+          effList.push(eff);
+          if(openRound===null){
+            var ok=true; CK_NUMBERS.forEach(function(n){ if(marks[n]<3) ok=false; });
+            if(ok) openRound=Math.floor(idx/3)+1;
+          }
+        });
+        var total=0; effList.forEach(function(e){ total+=e; });
+        var rounds=Math.max(1, Math.ceil(g.throws.length/3));
+        var marksToOpen=null;
+        if(openRound!==null){
+          var s=0, lim=openRound*3;
+          for(var i=0;i<Math.min(lim, effList.length);i++) s+=effList[i];
+          marksToOpen=s;
+        }
+        return { marks:marks, openRound:openRound, total:total, rounds:rounds,
+                 mprPhx: g.throws.length? total/rounds : null,
+                 mprDl: openRound!==null ? marksToOpen/openRound : (g.throws.length? total/rounds : null),
+                 allOpen: openRound!==null };
+      }
+
+      /* ---------- rendering ---------- */
+      function renderGame(){
+        if(!game) return;
+        var slots=document.querySelectorAll("#dartSlots .dart");
+        var i, s;
+        if(game.type==="01"){
+          var a=analyze01(game);
+          $("gType").textContent="01 ・ "+game.start;
+          $("gRound").textContent="ROUND "+a.dispRound;
+          $("board01").hidden=false; $("boardCk").hidden=true;
+          $("gRemain").textContent=a.remain;
+          $("gRoundScore").textContent=a.dispScore;
+          $("gDarts").textContent=game.throws.length;
+          $("gAvg").textContent=game.throws.length? fmt(a.total/game.throws.length) : "—";
+          for(i=0;i<3;i++){
+            s=slots[i];
+            if(i<a.dispThrows.length){ s.textContent=a.dispThrows[i].label; s.classList.add("filled"); s.classList.toggle("bust", a.dispBust); }
+            else { s.textContent="—"; s.classList.remove("filled","bust"); }
+          }
+          $("gMsg").textContent = a.dispBust ? "バースト！このラウンドは0点、残りはラウンド開始時に戻ります"
+            : (a.remain<=170 && a.remain>1 && game.throws.length ? "残り "+a.remain+" — 上がり圏内" : "");
+        } else {
+          var c=analyzeCk(game);
+          $("gType").textContent="スタンダードクリケット";
+          $("gRound").textContent="ROUND "+(Math.floor(game.throws.length/3)+1);
+          $("board01").hidden=true; $("boardCk").hidden=false;
+          var grid=$("ckGrid"); grid.innerHTML="";
+          CK_NUMBERS.forEach(function(n){
+            var cell=document.createElement("div");
+            cell.className="ckcell"+(c.marks[n]>=3?" open":"");
+            var mtxt = c.marks[n]>=3 ? "OPEN" : (c.marks[n]===0 ? "—" : (c.marks[n]===1?"／ ✕":"／／ ✕✕").slice(0, c.marks[n]*2));
+            mtxt = c.marks[n]>=3 ? "OPEN" : (c.marks[n]===0 ? "—" : "✕".repeat(c.marks[n]) + "（"+c.marks[n]+"）");
+            cell.innerHTML='<div class="n num">'+(n===25?"BULL":n)+'</div><div class="m">'+mtxt+'</div>';
+            grid.appendChild(cell);
+          });
+          $("gMarks").textContent=c.total;
+          $("gCkDarts").textContent=game.throws.length;
+          $("gMpr").textContent=(c.mprPhx===null?"—":fmt(c.mprPhx));
+          var inRound=game.throws.slice(Math.floor(game.throws.length/3)*3);
+          for(i=0;i<3;i++){
+            s=slots[i];
+            if(i<inRound.length){ s.textContent=inRound[i].label; s.classList.add("filled"); s.classList.remove("bust"); }
+            else { s.textContent="—"; s.classList.remove("filled","bust"); }
+          }
+          $("gMsg").textContent = c.allOpen ? "全ナンバーオープン！「ゲーム終了」でスタッツ確定" : "";
+        }
+      }
+
+      /* ---------- finish ---------- */
+      function finish01(a){
+        var darts=game.throws.length;
+        var rounds=game.throws[darts-1].round;
+        var ppd=a.total/darts;
+        var ppr=a.dl ? a.dl.score/a.dl.rounds : a.total/rounds;
+        var phx=phxFromPPD(ppd), dl=dlFromPPR(ppr);
+        var rec={ id:Date.now(), date:new Date().toISOString(), type:"01", start:game.start,
+          darts:darts, rounds:rounds, score:a.total,
+          ppd:round2(ppd), ppr:round2(ppr), mprPhx:null, mprDl:null,
+          phxRt:phx.rt, phxCls:phx.cls, dlRt:dl.rt, dlFlight:dl.flight };
+        pushRecord(rec);
+        showResult("01 ・ "+game.start+" — "+darts+"ダーツで上がり",
+          [["総得点", a.total+"点"],["ダーツ数", darts],["ラウンド数", rounds]],
+          "Rt."+phx.rt+" "+phx.cls, "PPD "+fmt(ppd)+"（100%スタッツ）",
+          "Rt."+dl.rt+" "+dl.flight, "PPR "+fmt(ppr)+"（80%スタッツ）");
+        game=null; gameSec.hidden=true;
+      }
+      function finishCk(){
+        if(!game || !game.throws.length) return;
+        var c=analyzeCk(game);
+        var phx=phxFromMPR(c.mprPhx), dl=dlFromMPR(c.mprDl);
+        var rec={ id:Date.now(), date:new Date().toISOString(), type:"cricket", start:null,
+          darts:game.throws.length, rounds:c.rounds, score:c.total,
+          ppd:null, ppr:null, mprPhx:round2(c.mprPhx), mprDl:round2(c.mprDl),
+          phxRt:phx.rt, phxCls:phx.cls, dlRt:dl.rt, dlFlight:dl.flight };
+        pushRecord(rec);
+        showResult("スタンダードクリケット",
+          [["総マーク", c.total],["ダーツ数", rec.darts],["ラウンド数", c.rounds],["全オープン", c.openRound!==null ? c.openRound+"Rで達成" : "未達成"]],
+          "Rt."+phx.rt+" "+phx.cls, "MPR "+fmt(c.mprPhx)+"（100%スタッツ）",
+          "Rt."+dl.rt+" "+dl.flight, "MPR "+fmt(c.mprDl)+"（80%スタッツ）");
+        game=null; gameSec.hidden=true;
+      }
+      function pushRecord(rec){
+        history.unshift(rec); saveHist(history);
+        renderSummary(); renderHistory();
+      }
+      function showResult(title, stats, phxRtTxt, phxSt, dlRtTxt, dlSt){
+        $("resTitle").textContent="結果 — "+title;
+        $("resStats").innerHTML=stats.map(function(s){ return "<span>"+s[0]+" <b>"+s[1]+"</b></span>"; }).join("");
+        $("resPhxRt").textContent=phxRtTxt; $("resPhxSt").textContent=phxSt;
+        $("resDlRt").textContent=dlRtTxt; $("resDlSt").textContent=dlSt;
+        resultSec.hidden=false;
+        resultSec.scrollIntoView({behavior:"smooth", block:"start"});
+      }
+
+      /* ---------- summary with ranges ---------- */
+      function rangeRecords(){
+        if(range==="all") return history.slice();
+        if(range==="last30") return history.slice(0,30);
+        var now=new Date();
+        return history.filter(function(r){
+          var d=new Date(r.date);
+          return d.getFullYear()===now.getFullYear() && d.getMonth()===now.getMonth() && d.getDate()===now.getDate();
+        });
+      }
+      function renderSummary(){
+        var recs=rangeRecords();
+        var g01=recs.filter(function(r){ return r.type==="01"; });
+        var gck=recs.filter(function(r){ return r.type==="cricket"; });
+        renderSumCard("Phx", g01, gck, recs.length,
+          function(rs){ return phxFromPPD(avg(rs.map(function(r){return r.ppd;}))); },
+          function(rs){ return phxFromMPR(avg(rs.map(function(r){return r.mprPhx;}))); },
+          function(rs){ return "PPD "+fmt(avg(rs.map(function(r){return r.ppd;}))); },
+          function(rs){ return "MPR "+fmt(avg(rs.map(function(r){return r.mprPhx;}))); },
+          function(rt){ return phxClassForRt(rt); });
+        renderSumCard("Dl", g01, gck, recs.length,
+          function(rs){ return dlFromPPR(avg(rs.map(function(r){return r.ppr;}))); },
+          function(rs){ return dlFromMPR(avg(rs.map(function(r){return r.mprDl;}))); },
+          function(rs){ return "PPR "+fmt(avg(rs.map(function(r){return r.ppr;}))); },
+          function(rs){ return "MPR "+fmt(avg(rs.map(function(r){return r.mprDl;}))); },
+          function(rt){ var f=dlFlightForRt(rt); return f? f+"フライト" : null; });
+      }
+      function renderSumCard(sys, g01, gck, totalCount, conv01, convCk, det01, detCk, chipFor){
+        var rtEl=$("sum"+sys+"Rt"), detEl=$("sum"+sys+"Detail"),
+            chipEl=$(sys==="Phx" ? "sumPhxClass" : "sumDlFlight");
+        if(!g01.length && !gck.length){
+          rtEl.textContent="記録なし"; rtEl.classList.add("none");
+          chipEl.hidden=true; detEl.textContent="この範囲の記録はありません";
+          return;
+        }
+        rtEl.classList.remove("none");
+        var rts=[], parts=[];
+        if(g01.length){ rts.push(conv01(g01).rt); parts.push("01（"+g01.length+"） "+det01(g01)); }
+        if(gck.length){ rts.push(convCk(gck).rt); parts.push("クリケット（"+gck.length+"） "+detCk(gck)); }
+        var comp=round2(avg(rts));
+        rtEl.innerHTML=fmt(comp)+' <small>Rt</small>';
+        var chip=chipFor(comp);
+        if(chip){ chipEl.textContent=chip; chipEl.hidden=false; } else chipEl.hidden=true;
+        detEl.textContent=parts.join(" ／ ");
+      }
+
+      /* ---------- history UI ---------- */
+      function renderHistory(){
+        var list=$("histList"); list.innerHTML="";
+        $("histEmpty").hidden=history.length>0;
+        $("clearBtn").hidden=history.length===0;
+        history.forEach(function(r){
+          var item=document.createElement("div"); item.className="hitem";
+          var d=new Date(r.date);
+          var ds=d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate()+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
+          var t1=r.type==="01" ? ("01 ・ "+r.start) : "クリケット";
+          var t2=r.type==="01"
+            ? (r.score+"点 ／ "+r.darts+"ダーツ ／ PPD "+fmt(r.ppd)+" ／ PPR "+fmt(r.ppr))
+            : (r.score+"マーク ／ "+r.darts+"ダーツ ／ MPR "+fmt(r.mprPhx)+"（DL "+fmt(r.mprDl)+"）");
+          var main=document.createElement("div"); main.className="main";
+          main.innerHTML='<div class="t1"></div><div class="t2 num"></div>';
+          main.querySelector(".t1").innerHTML="";
+          main.querySelector(".t1").appendChild(document.createTextNode(t1+" "));
+          var dateSpan=document.createElement("span");
+          dateSpan.style.cssText="color:var(--ink2);font-weight:500;font-size:.75rem;";
+          dateSpan.textContent=ds;
+          main.querySelector(".t1").appendChild(dateSpan);
+          main.querySelector(".t2").textContent=t2;
+          var rts=document.createElement("div"); rts.className="rts num";
+          rts.innerHTML='<span class="p">PHX Rt.'+r.phxRt+'</span><br><span class="d">DL Rt.'+r.dlRt+'</span>';
+          var del=document.createElement("button");
+          del.type="button"; del.className="del"; del.textContent="削除";
+          del.setAttribute("aria-label", t1+" の記録を削除");
+          del.addEventListener("click", function(){
+            history=history.filter(function(x){ return x.id!==r.id; });
+            saveHist(history); renderSummary(); renderHistory();
+          });
+          item.appendChild(main); item.appendChild(rts); item.appendChild(del);
+          list.appendChild(item);
+        });
+      }
+      $("clearBtn").addEventListener("click", function(){
+        history=[]; saveHist(history); renderSummary(); renderHistory();
+      });
+
+      renderSummary();
+      renderHistory();
+    })();
+    </script>
+  </body>
+</html>
