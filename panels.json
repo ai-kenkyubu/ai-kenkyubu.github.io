@@ -1,69 +1,70 @@
 {
- "updated": "2026-11-28",
- "stats": {
-  "hpVisitors": 18,
-  "noteViews": 94,
-  "followers": 9,
-  "date": "2026-11-27"
- },
- "results": {
-  "date": "2026-11-27",
-  "keirin": {
-   "races": 79,
-   "trifectaHits": 24,
-   "exactaHits": 38,
-   "returnRate": 73.2,
-   "simPnl": -18600,
-   "returnRateDiff": 2.7,
-   "cumulative": {
-    "races": 1566,
-    "trifectaHits": 376,
-    "exactaHits": 647,
-    "returnRate": 68.7,
-    "simPnl": -420740,
-    "totalRaces": 1566
-   },
-   "trend": [
-    61.1,
-    77.5,
-    73.1,
-    76.5,
-    112.6,
-    64.3,
-    25.1,
-    55.0,
-    49.0,
-    59.4,
-    83.6,
-    60.8,
-    70.5,
-    73.2
-   ]
+  "updated": "2026-11-29",
+  "stats": {
+    "hpVisitors": 25,
+    "noteViews": 78,
+    "followers": 11,
+    "date": "2026-11-28"
   },
-  "boat": {
-   "races": 168,
-   "trifectaHits": 31,
-   "exactaHits": 48,
-   "returnRate": 56.3,
-   "simPnl": -73320,
-   "returnRateDiff": -70.6,
-   "cumulative": {
-    "races": 1058,
-    "trifectaHits": 212,
-    "exactaHits": 370,
-    "returnRate": 78.0,
-    "simPnl": -228040,
-    "totalRaces": 1058
-   },
-   "trend": [
-    81.1,
-    60.9,
-    52.8,
-    109.1,
-    64.3,
-    126.9,
-    56.3
-   ]
+  "results": {
+    "date": "2026-11-28",
+    "keirin": {
+      "races": 78,
+      "trifectaHits": 10,
+      "exactaHits": 20,
+      "returnRate": 45.1,
+      "simPnl": -37970,
+      "returnRateDiff": -28.1,
+      "cumulative": {
+        "races": 1644,
+        "trifectaHits": 386,
+        "exactaHits": 667,
+        "returnRate": 67.6,
+        "simPnl": -458710,
+        "totalRaces": 1644
+      },
+      "trend": [
+        77.5,
+        73.1,
+        76.5,
+        112.6,
+        64.3,
+        25.1,
+        55.0,
+        49.0,
+        59.4,
+        83.6,
+        60.8,
+        70.5,
+        73.2,
+        45.1
+      ]
+    },
+    "boat": {
+      "races": 126,
+      "trifectaHits": 23,
+      "exactaHits": 50,
+      "returnRate": 55.7,
+      "simPnl": -55630,
+      "returnRateDiff": -0.6,
+      "cumulative": {
+        "races": 1184,
+        "trifectaHits": 235,
+        "exactaHits": 420,
+        "returnRate": 75.6,
+        "simPnl": -283670,
+        "totalRaces": 1184
+      },
+      "trend": [
+        81.1,
+        60.9,
+        52.8,
+        109.1,
+        64.3,
+        126.9,
+        56.3,
+        55.7
+      ]
+    }
   }
- }
 }
